@@ -1,0 +1,24 @@
+Database tables to be created-
+-User
+-property
+-property type
+-location
+-images
+-amenites 
+-reviews
+-wishlist
+-booking
+-transaction
+-renter
+-services
+-price
+
+
+pages of the webapp
+-homepage--with user login and without userlogin
+-add properties
+-login/signup pages
+-booking pages
+-searcg functionality
+-wishlist
+-property
