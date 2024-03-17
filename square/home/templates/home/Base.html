@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+          <head>
+                    <meta charset="utf-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <title></title>
+                    <meta name="description" content="">
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <!-- linking the css file created by paras -->
+                    <link rel="stylesheet" href="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\homepage.css">
+                    {% load static %}
+                    {% load bootstrap5 %}<!-- loading the bootstrap installed with django-->
+                    {% bootstrap_css %}
+                    {% bootstrap_javascript %}
+                    <!-- for bootstrap  to view page without server running-->
+                    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          </head>
+          <body>
+                                        
+                    {% block navbar %}
+                    <header class="header">
+                              <div class="ns-logo"><img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\logo.png" alt="lodo"></div>
+                              <ul class="main-nav">
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                        <li><a href="#">Signup</a></li>
+                              </ul>
+                              <div class="search-container">
+                                        <input type="text" class="search-input" placeholder="Where you want your space">
+                                        <button class="search-btn">
+                                        <img src="search.png" alt="Search" class="search-icon">
+                                        </button>
+                              </div>
+                    </header>
+                    {% endblock %}
+
+                    {% block hero %}
+                    <div class="head-img-container">
+                              <div class="head_img">
+                                        <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\main-page-home1.jpg" alt="">
+                              </div>
+                              <h2 class="img-text">Find Your Perfect Place:
+                                        <br>
+                                        Rent with Ease!
+                              </h2>
+                    </div>
+                    {% endblock %}
+
+                    {% block ad %}
+                    {% endblock %}
+
+                    {% block properties %}
+                    <section id="sellers">
+                              <div class="seller container">
+
+                                        <h2>Best Selling space</h2>
+                                        <div class="best-seller-raw">
+                                        <!-- single entry of row  individual column/entry-->
+                                        <div class="best-column">
+                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\img1.png" alt="img">
+                                                  <div class="best-column-txt">
+                                                            <div class="name-of-p">
+                                                            <p class="property-name">3bhk anand</p>
+                                                            </div>
+                                                            <div class="rating">
+                                                            <i class='bx bxs-star'></i>
+                                                            <i class='bx bxs-star'></i>
+                                                            <i class='bx bxs-star'></i>
+                                                            <i class='bx bx-star'></i>
+                                                            <i class='bx bx-star'></i>
+                                                            </div>
+                                                            <div class="price">
+                                                            Rs.37.24
+                                                            <div class="colors">
+                                                                      <i class='bx bxs-circle red'></i>
+                                                                      <i class='bx bxs-circle blue'></i>
+                                                                      <i class='bx bxs-circle white'></i>
+                                                            </div>
+                                                            </div>
+                                                            <div class="buy-now">
+                                                            <button><a href="https://codepen.io/sanketbodke/full/mdprZOq">Buy Now</a></button>
+                                                            </div>
+                                                  </div>
+                                        </div>
+                              </div>
+                    </section>
+                    {% endblock %}
+
+                    {% block services %}
+                    <div class="features">
+                              <div class="first-feature">
+                                        <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\home logo.png" alt="">
+                                        <h4>Enjoy Some Flexibility</h4>
+                                        <h6>make it easy to book your space </h6>
+                              </div>
+
+                              <div class="first-feature">
+                                        <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\headphone.png" alt="">
+                                        <h4>24/7 CUSTOMER SERVICE</h4>
+                                        <h6>Friendly 24/7 customer support </h6>
+                              </div>
+
+                              <div class="first-feature">
+                                        <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\Icon-check.png" alt="">
+                                        <h4>MONEY BACK GUARANTEE</h4>
+                                        <h6>We reurn money within 30 days </h6>
+                              </div>
+                    </div>
+                    {% endblock %}
+
+                    {% block footer %}
+                    <footer class="footer">
+                              <div class="foot">
+                                        <div class="column">
+                                        <h3>Support</h3>
+                                        <ul>
+                                                  <li>Contact us</li>
+                                                  <li>Cancellation support</li>
+                                                  <li>Report a problem</li>
+                                        </ul>
+                                        </div>
+
+                                        <div class="column">
+                                        <h3>Account</h3>
+                                        <ul>
+                                                  <li><a href="#">My Account</a></li>
+                                                  <li><a href="#">Login/Register</a></li>
+                                                  <li><a href="#">Wishlist</a></li>
+                                        </ul>
+                                        </div>
+
+                                        <div class="column">
+                                        <h3>About nextsquare</h3>
+                                        <p class="about_P">We provide rental solutions for homes, garages, and warehouses, ensuring convenience and satisfaction
+                                                  for both
+                                                  tenants and property owners with our curated selection of properties and streamlined processes.</p>
+                                        </div>
+                              </div>
+
+                              <div class="social">
+                                        <p class="copy">&copy; copyright</p>
+                                        <a><img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\instagram.png"></a>
+                                        <a><img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\facebook.png"></a>
+                                        <a><img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\linkedin.png"></a>
+                              </div>
+                    </footer>
+
+                    {% endblock %}
+
+                    <img src="{% static 'images/img1.png' %}" alt="Your Image">
+
+          </body>
+</html>

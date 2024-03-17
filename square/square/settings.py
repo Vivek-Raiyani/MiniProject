@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'reviews',
     'bootstrap5',
 ]
+# for static file
+STATIC_URL = "static/"
 
 # for media file accesing purpose ,need to learn how it works
 MEDIA_URL = '/media/'
