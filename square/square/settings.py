@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'account',
     'property',
     'wishlist',
+    'booking',
+    'reviews',
     'bootstrap5',
 ]
 

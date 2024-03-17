@@ -29,12 +29,17 @@ class CustomUserManager(UserManager):
                         raise ValueError('Superuser must have is_superuser=True.')
 
                 return self._create_user(email, password, **extra_fields)
+        
+'''
+In Django, you don't necessarily need to create a custom manager to use email for authentication.
+ Django's built-in authentication system already supports using email as the unique identifier for authentication without requiring a custom manager.
+'''
          
 class User(AbstractUser):
           email=models.EmailField(unique=True,default='')
           name=models.CharField(max_length=50, default='')
           phone_no=models.CharField(max_length=10, default='',null=True,blank=True)
-          
+
           # option of to select gender of the user
           Choices=((1,'Male'),(2,'Female'),(3,'Others'))
           gender=models.IntegerField(choices=Choices,default=1)
