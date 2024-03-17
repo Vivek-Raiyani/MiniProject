@@ -22,3 +22,11 @@ pages of the webapp
 -searcg functionality
 -wishlist
 -property
+
+
+
+define function of class so it becomes easy wjile working with views
+
+setup cdn using nignx after it is done locally. without it
+
+# add comment so it becomes easy to understand code when viewing later
