@@ -1,0 +1,51 @@
+<!-- user profile page conatins info of the user-->
+
+<!--  we need to pass the user, properties and reviews -->
+
+<!--  we need to add a button to add property , edit profile, delete property-->
+
+{% extends 'home/base.html' %}
+
+{% block profile %}
+          <section class="container">
+                    <!-- image at centre-->
+                    <form method="post" enctype="multipart/form-data">
+                              {% csrf_token %}
+                              <section class="row">
+                                        <div class="col-md-4">
+                                                  <img src="{{user.profile_image.url}}" alt="" class="img-fluid">
+                                                  <input type="file" name="profile_image" placeholder="upadate profile">
+                                                  <hr> 
+                                                  <div class="row">
+                                                            <input type="textarea" name="bio" placeholder="{{user.bio}}">
+                                                  </div>  
+                                                  
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                                  <input type="text" name="username" placeholder="{{user.username}}">
+                                                  <input type="text" name="email" placeholder="{{user.email}}">
+                                                  <hr>
+                                                  <input type="tel" name="phone_no" placeholder="{{user.phone_no}}">
+                                                  <hr>
+                                                  <!--  in selction feild we need to provide integer insted of string  change valve type 1 for male-->
+                                                  <select name="gender">
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Others">Others</option> 
+                                                  </select>
+                                                  <hr>
+                                                  <select name="user_type">
+                                                            <option value="Renter">Renter</option>
+                                                            <option value="Owner">Owner</option> 
+                                                  </select>
+                                                  <hr>
+                                                  <button class="btn btn-primary" type="submit">Update Profile</button>
+                                        </div>
+                              </section>
+                    </form>
+
+          </section>
+
+{% endblock %}

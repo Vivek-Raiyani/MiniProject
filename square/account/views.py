@@ -2,14 +2,16 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from reviews.models import reviews
-from  property.models import Property, current_renter
+from  property.models import Property, current_renter, propertyDocument, propertyImage, propertyLocation, typeOfProperty
+
+from django.contrib.auth.decorators import login_required
 
 from property.views import get_property_details
 
 # Create your views here.
 
 
-
+@login_required
 def account(request):
     """
     View function to render the user profile page.
@@ -31,4 +33,84 @@ def account(request):
         'user_reviews': user_reviews,
         'user_renting': user_renting
     }
-    return render(request, 'profile.html', context)
+
+    # for debugging purpose to print details on the terminal
+    print(user)
+    print(user_properties)
+    print(user_reviews)
+    print(user_renting)
+    print(properties_info)
+    print(context)
+    
+    
+    return render(request, 'account/profile.html', context)
+
+@login_required
+def add_property(request):
+    if request.user.user_type == 'Owner':
+        if request.method =='POST':
+            property=Property()
+            property.title=request.POST.get('title')
+            property.availabality=True
+            property.description=request.POST.get('description')
+            property.user_preference=request.POST.get('user_preference')
+            property.owner=request.user
+            property.save()
+
+            images=propertyImage()
+            images.default_image=request.FILES.get('default_image')
+            images.image2=request.FILES.get('image2')
+            images.image3=request.FILES.get('image3')
+            images.image4=request.FILES.get('image4')
+            images.image5=request.FILES.get('image5')
+            images.property=property
+            images.save()
+
+            document=propertyDocument()
+            document.document=request.FILES.get('document')
+            document.property=property
+            document.save()
+
+            location=propertyLocation()
+            location.location=request.POST.get('location')
+            location.city=request.POST.get('city')
+            location.state=request.POST.get('state')
+            location.country=request.POST.get('country')
+            location.zipcode=request.POST.get('zipcode')
+            location.property=property
+            location.save()
+            
+            type=typeOfProperty()
+            type.type=request.POST.get('type')
+            return render(request, 'account/profile.html')
+
+        return render(request, 'account/add_property.html')
+
+    return render(request, 'account/profile.html')
+
+@login_required
+def remove_property(request):
+    if request.user.user_type == 'Owner':
+        if request.method == 'POST':
+            property_id = request.POST.get('property_id')
+            property = Property.objects.get(id=property_id)
+            property.delete()
+            return render(request, 'account/profile.html')
+
+        return render(request, 'account/remove_property.html')
+    
+    return render(request, 'account/profile.html')
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        user = request.user
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.email = request.POST.get('email')
+        user.phone_no = request.POST.get('phone_no')
+        user.gender = request.POST.get('gender')
+        user.user_type = request.POST.get('user_type')
+        user.save()
+        return render(request, 'account/profile.html')
+    return render(request, 'account/edit_profile.html')

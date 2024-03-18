@@ -1,3 +1,32 @@
+to be implemented
+-remove property html pages
+-add property html pages
+
+- history of user page to be created
+-registration page to be created
+-signup views function to be created
+- add revies and rating by renter feature 
+-cancaltion views anf implemantation
+- booking functionality , in propery page no need for other page
+
+
+
+
+888888888888888888888888888888888888
+========================================
+create commit the start working on project
+================================
+********************************
+
+
+
+
+
+
+
+
+----------------------------------
+
 Database tables to be created-
 -User
 -property

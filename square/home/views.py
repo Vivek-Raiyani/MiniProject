@@ -12,4 +12,8 @@ def get_all_properties():
 # Create your views here.
 def home(request):
     all_properties = get_all_properties()
+
+    # for debuggin purpose
+    print(all_properties)
+
     return render(request, 'home/Base.html', {'properties': all_properties})

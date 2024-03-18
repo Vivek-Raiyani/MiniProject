@@ -4,6 +4,8 @@
 
 <!--  we need to add a button to add property , edit profile, delete property-->
 
+<!-- adjust the height sections off all-->
+
 {% extends 'home/base.html' %}
 
 {% block profile %}
@@ -33,20 +35,40 @@
                                                   <p>{{user.bio}}</p>
                                         </div>
 
-                                        <div="row">
-                                                  <div class="col-md-6">
-                                                            <a href="">My Reviews</a>
+                                        
+                                                  {% if user.user_type == 'Owner' %}
+                                                  <div class="row">
+                                                            <div class="col-md-3">
+                                                                      <a href="">My Reviews</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">My Bookings</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">Add Property</a></a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">Delete listing</a>
+                                                            </div>
                                                   </div>
-                                                  <div class="col-md-6">
-                                                            <a href="">My Bookings</a>
+                                                  {% else %}
+                                                  <div class="row">
+                                                            <div class="col-md-3">
+                                                                      <a href="">My Renting</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">Add Review</a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">History</a></a>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                      <a href="">Cancalation</a>
+                                                            </div>
                                                   </div>
-                                                  <div class="col-md-6">
-                                                            <a href="">Add Property</a></a>
-                                                  </div>
-                                                  <div class="col-md-6">
-                                                            <a href="">Delete listing</a>
-                                                  </div>
-                                        </div>
+                                                  {% endif %}
+
+                                        
                                         <hr>
 
                                         <div class="row">

@@ -46,6 +46,7 @@ def get_property_details(property_id):
             'current_renter': current_renter
         }
 
+
         return property_details
 
     except Property.DoesNotExist:

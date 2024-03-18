@@ -34,6 +34,13 @@ def wishlist(request):
     if request.user.is_authenticated:
         user = request.user
         wishlist_properties = get_wishlist_properties(user)
+
+        
+        # printing all the wishlist propert on the terminal for debuggin puropse
+        print(user)
+        print(wishlist_properties)
+
+
         return render(request, 'wishlist/wishlist.html', {'wishlist_properties': wishlist_properties})
     else:
         # Handle case where user is not authenticated
