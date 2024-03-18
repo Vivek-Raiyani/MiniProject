@@ -19,27 +19,27 @@ class Property(models.Model):
 
 class propertyImage(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    default_image = models.ImageField(upload_to='property_images')
-    image2 = models.ImageField(upload_to='property_images', null=True, blank=True)
-    image3 = models.ImageField(upload_to='property_images', null=True, blank=True)
-    image4 = models.ImageField(upload_to='property_images', null=True, blank=True)
-    image5 = models.ImageField(upload_to='property_images', null=True, blank=True)
+    default_image = models.ImageField(upload_to='media/property_images')
+    image2 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
+    image3 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
+    image4 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
+    image5 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
 
     def __str__(self):
         return self.property.title
     
 class propertyVideo(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    default_video = models.FileField(upload_to='property_videos')
-    video2 = models.FileField(upload_to='property_videos', null=True, blank=True)
+    default_video = models.FileField(upload_to='media/property_videos')
+    video2 = models.FileField(upload_to='media/property_videos', null=True, blank=True)
 
     def __str__(self):
         return self.property.title
     
 class propertyDocument(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    default_document = models.FileField(upload_to='property_documents')
-    document2 = models.FileField(upload_to='property_documents', null=True, blank=True)
+    default_document = models.FileField(upload_to='media/property_documents')
+    document2 = models.FileField(upload_to='media/property_documents', null=True, blank=True)
 
     def __str__(self):
         return self.property.title

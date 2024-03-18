@@ -39,6 +39,7 @@ class User(AbstractUser):
           email=models.EmailField(unique=True,default='')
           name=models.CharField(max_length=50, default='')
           phone_no=models.CharField(max_length=10, default='',null=True,blank=True)
+          profile_pic=models.ImageField(upload_to='media/profile_pic', null=True,blank=True)
 
           # option of to select gender of the user
           Choices=((1,'Male'),(2,'Female'),(3,'Others'))
