@@ -1,0 +1,69 @@
+<!-- user profile page conatins info of the user-->
+
+<!--  we need to pass the user, properties and reviews -->
+
+<!--  we need to add a button to add property , edit profile, delete property-->
+
+{% extends 'home/base.html' %}
+
+{% block profile %}
+          <section class="container">
+                    <!-- image at centre-->
+                    <section class="row">
+                              <div class="col-md-4">
+                                        <img src="{{user.profile_image.url}}" alt="" class="img-fluid">
+                                        <hr>   
+                                        <h3>{{user.username}}</h3>
+                                        <p>{{user.email}}</p>
+                                        <hr>
+                                        <p>{{user.phone_no}}</p>
+                                        <hr>
+                                        <p>{{user.gender}}</p>
+                                        <hr>
+                                        <p>{{user.user_type}}</p>
+                                        <hr>
+                                        <p>{{user.date_joined}}</p>
+                                        <hr>
+                                        <p>{{user.verified}}</p> 
+                                        
+                              </div>
+
+                              <div class="col-md-8">
+                                        <div class="row">
+                                                  <p>{{user.bio}}</p>
+                                        </div>
+
+                                        <div="row">
+                                                  <div class="col-md-6">
+                                                            <a href="">My Reviews</a>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                            <a href="">My Bookings</a>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                            <a href="">Add Property</a></a>
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                            <a href="">Delete listing</a>
+                                                  </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                                  {% for property in user_properties %}
+                                                            <div class="col-md-3 card">
+                                                                      <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" alt="default property image">
+                                                                      <div class="card-body">
+                                                                                <h5 class="card-title">{{property.title}}</h5>
+                                                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                                                      </div>   
+                                                            </div> 
+                                                  {% endfor %}                                                        
+                                        </div>
+
+                              </div>
+                    </section>
+
+          </section>
+
+{% endblock %}
