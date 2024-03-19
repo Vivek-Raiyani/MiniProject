@@ -110,11 +110,26 @@ def add_property(request):
 
     return render(request, 'account/profile.html')
 
+
+# implement by use of button not changing url
+#version1
 @login_required
 def remove_property(request):
     if request.user.user_type == 2:
         if request.method == 'POST':
             property_id = request.POST.get('property_id')
+            property = Property.objects.get(id=property_id)
+            property.delete()
+            return render(request, 'account/profile.html')
+
+        return render(request, 'account/remove_property.html')
+    
+    return render(request, 'account/profile.html')
+
+#version 2-----using button not chaning url need to be implemented currently is not working
+def remove_property(request, property_id):
+    if request.user.user_type == 2:
+        if request.method == 'POST':
             property = Property.objects.get(id=property_id)
             property.delete()
             return render(request, 'account/profile.html')

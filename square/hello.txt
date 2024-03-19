@@ -1,11 +1,9 @@
 to be implemented
--remove property html pages
-
-- history of user page to be created
 -registration page to be created
--signup views function to be created
+-signup views function to be created 
 
-- add revies and rating by renter feature 
+single page applation like views for property, profiel etc
+
 
 
 - booking functionality , in propery page no need for other page
