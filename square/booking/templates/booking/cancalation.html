@@ -1,3 +1,12 @@
 <!--  first check the status form transtion and allow to cancle  , reson to cancle and also update the booking -->
 
 <!-- create a form and check first type of user , transaction status, reason to cancle-->
+
+{% block content %}
+          <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+                    <!-- radio button to selct the property they want to cancle-->
+
+          <input type="submit" value="Submit">
+          </form>
+{% endblock %}

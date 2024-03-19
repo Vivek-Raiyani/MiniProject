@@ -3,12 +3,20 @@ from django.shortcuts import render
 from django.shortcuts import render
 from reviews.models import reviews
 from  property.models import Property, current_renter, propertyDocument, propertyImage, propertyLocation, typeOfProperty, pricing
-
+from booking.models import Booking, Transaction
 from django.contrib.auth.decorators import login_required
 
 from property.views import get_property_details
 
 # Create your views here.
+
+def history(user):
+    record=Booking.objects.filter(user=user)
+    transaction=[]
+    for record in record:
+        transaction+=Transaction.objects.filter(booking=record).filter(status=1)
+    
+    return transaction
 
 
 @login_required
@@ -27,11 +35,15 @@ def account(request):
         if property_info:
             properties_info.append(property_info)
 
+    # getting user history
+    user_history = history(user)
+
     context = {
         'user': user,
         'user_properties': properties_info,
         'user_reviews': user_reviews,
-        'user_renting': user_renting
+        'user_renting': user_renting,
+        'user_history': user_history
     }
 
     # for debugging purpose to print details on the terminal
@@ -42,6 +54,9 @@ def account(request):
     print(properties_info)
     print(context)
     print(user.profile_pic.url)
+    print('user history')
+    print(user_history)
+    
     
     
     return render(request, 'account/profile.html', context)

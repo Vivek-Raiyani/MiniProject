@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Property, propertyImage, typeOfProperty, propertyLocation, current_renter
-from reviews.models import reviews, rating
+from reviews.models import reviews, rating 
+from booking.models import Booking, Transaction
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -53,8 +55,7 @@ def get_property_details(property_id):
         return None
 
 
-
-def property(request, property_id):
+def property_view(request, property_id):
     """
     View function to render the property detail page.
     """
@@ -63,9 +64,13 @@ def property(request, property_id):
 
     if property_info:
         # If property info is found, render the detail page
+
+         # property detials to be fetched like pricing, location etc
         return render(request, 'property_detail.html', {'property_info': property_info})
     else:
         # If property info is not found, render a 404 page
         return render(request, '404.html', status=404)
 
 
+# combine the booking and property page or keep them seperate?
+    

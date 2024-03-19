@@ -13,7 +13,7 @@ class Booking(models.Model):
             return f'{self.user.username} - {self.property.title}'
 
 class Transaction(models.Model):
-          Choices=((1,'Succes'),(2,'Failure'),(3,'Pending'))
+          Choices=((1,'Succes'),(2,'Failure'),(3,'Pending'),(4,'Cancled'))
           status=models.IntegerField(choices=Choices,default=3)
           booking= models.OneToOneField('booking.Booking', on_delete=models.CASCADE)
 
