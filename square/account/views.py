@@ -41,6 +41,7 @@ def account(request):
     print(user_renting)
     print(properties_info)
     print(context)
+    print(user.profile_pic.url)
     
     
     return render(request, 'account/profile.html', context)

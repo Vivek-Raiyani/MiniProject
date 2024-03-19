@@ -29,4 +29,4 @@ def logout_view(request):
     # Log the user out
     logout(request)
     # Redirect to the homepage or any other desired page
-    return redirect('home/homepage')
+    return redirect('home/homepage.html')
