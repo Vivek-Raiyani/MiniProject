@@ -53,7 +53,7 @@ class typeOfProperty(models.Model):
              (16,'Clubhouse'),(17,'Garden'),(18,'Gym'),(19,'Cinema'),(20,'Cafe'),
              (21,'Stadium'),(22,'Room')
              )
-    type = models.IntegerField(choices=Choices,default=1)
+    property_type = models.IntegerField(choices=Choices,default=1)
     
 
     def __str__(self):
@@ -73,7 +73,7 @@ class propertyLocation(models.Model):
 class pricing(models.Model):
     Choices=((1,'PerDay'),(2,'PerWeek'),(3,'Monthly'),(4,'Yearly'))
     property = models.ForeignKey(typeOfProperty, on_delete=models.CASCADE)
-    type = models.IntegerField(choices=Choices,default=1)
+    price_type = models.IntegerField(choices=Choices,default=1)
     price = models.FloatField( default=0)
 
     def __str__(self):

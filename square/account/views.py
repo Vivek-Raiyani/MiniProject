@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from reviews.models import reviews
-from  property.models import Property, current_renter, propertyDocument, propertyImage, propertyLocation, typeOfProperty
+from  property.models import Property, current_renter, propertyDocument, propertyImage, propertyLocation, typeOfProperty, pricing
 
 from django.contrib.auth.decorators import login_required
 
@@ -48,7 +48,7 @@ def account(request):
 
 @login_required
 def add_property(request):
-    if request.user.user_type == 'Owner':
+    if request.user.user_type == 2:
         if request.method =='POST':
             property=Property()
             property.title=request.POST.get('title')
@@ -77,12 +77,18 @@ def add_property(request):
             location.city=request.POST.get('city')
             location.state=request.POST.get('state')
             location.country=request.POST.get('country')
-            location.zipcode=request.POST.get('zipcode')
+            location.zipcode=request.POST.get('pincode')
             location.property=property
             location.save()
             
             type=typeOfProperty()
-            type.type=request.POST.get('type')
+            type.property_type=request.POST.get('type')
+
+            price=pricing()
+            price.price=request.POST.get('price')
+            price.type=request.POST.get('price_type')
+            price.property=property
+            price.save()
             return render(request, 'account/profile.html')
 
         return render(request, 'account/add_property.html')
@@ -91,7 +97,7 @@ def add_property(request):
 
 @login_required
 def remove_property(request):
-    if request.user.user_type == 'Owner':
+    if request.user.user_type == 2:
         if request.method == 'POST':
             property_id = request.POST.get('property_id')
             property = Property.objects.get(id=property_id)
