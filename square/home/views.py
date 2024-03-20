@@ -13,7 +13,9 @@ def get_all_properties():
 def home(request):
     all_properties = get_all_properties()
 
+    # in html code how to render all properties indivialiit reun loop on the context
     # for debuggin purpose
     print(all_properties)
+
 
     return render(request, 'home/Base.html', {'properties': all_properties})

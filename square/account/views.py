@@ -97,12 +97,14 @@ def add_property(request):
             location.save()
             
             type=typeOfProperty()
-            type.property_type=request.POST.get('type')
+            type.property_type=request.POST.get('property_type')
+            type.property=property
+            type.save()
 
             price=pricing()
             price.price=request.POST.get('price')
-            price.type=request.POST.get('price_type')
-            price.property=property
+            price.price_type=request.POST.get('price_type')
+            price.property=type
             price.save()
             return render(request, 'account/profile.html')
 
@@ -142,12 +144,21 @@ def remove_property(request, property_id):
 def edit_profile(request):
     if request.method == 'POST':
         user = request.user
-        user.first_name = request.POST.get('first_name')
-        user.last_name = request.POST.get('last_name')
-        user.email = request.POST.get('email')
-        user.phone_no = request.POST.get('phone_no')
-        user.gender = request.POST.get('gender')
-        user.user_type = request.POST.get('user_type')
+        #user.email = request.POST.get('email')
+        #user.phone_no = request.POST.get('phone_no')
+        #user.gender = request.POST.get('gender')
+        #user.user_type = request.POST.get('user_type')
+        #user.first_name = 'first_name'
+        #user.last_name = 'last_name'
+
+        if request.FILES.get('profile_pic'):
+            pic=request.FILES.get('profile_pic')
+            print(pic)
+            print(request.FILES.get('profile_pic'))
+            user.profile_pic.delete()
+            user.profile_pic = pic
+        
+
         user.save()
         return render(request, 'account/profile.html')
     return render(request, 'account/edit_profile.html')

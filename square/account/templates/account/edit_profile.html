@@ -13,8 +13,8 @@
                               {% csrf_token %}
                               <section class="row">
                                         <div class="col-md-4">
-                                                  <img src="{{user.profile_image.url}}" alt="" class="img-fluid">
-                                                  <input type="file" name="profile_image" placeholder="upadate profile">
+                                                  <img src="{{user.profile_pic.url}}" alt="" class="img-fluid">
+                                                  <input type="file" name="profile_pic" placeholder="upadate profile">
                                                   <hr> 
                                                   <div class="row">
                                                             <input type="textarea" name="bio" placeholder="{{user.bio}}">
@@ -31,16 +31,17 @@
                                                   <hr>
                                                   <!--  in selction feild we need to provide integer insted of string  change valve type 1 for male-->
                                                   <select name="gender">
-                                                            <option value="Male">Male</option>
-                                                            <option value="Female">Female</option>
-                                                            <option value="Others">Others</option> 
+                                                            <option value=1>Male</option>
+                                                            <option value=2>Female</option>
+                                                            <option value=3>Others</option> 
                                                   </select>
                                                   <hr>
                                                   <select name="user_type">
-                                                            <option value="Renter">Renter</option>
-                                                            <option value="Owner">Owner</option> 
+                                                            <option value=1>Renter</option>
+                                                            <option value=2>Owner</option> 
                                                   </select>
                                                   <hr>
+
                                                   <button class="btn btn-primary" type="submit">Update Profile</button>
                                         </div>
                               </section>

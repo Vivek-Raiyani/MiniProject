@@ -13,8 +13,8 @@ class Property(models.Model):
 
           owner=models.ForeignKey('account.User',on_delete=models.CASCADE)
 
-          def __str__(self):
-            return self.title
+          # write __str__ methos for all class such that deleting dont contradict
+
           
 
 class propertyImage(models.Model):
@@ -25,24 +25,24 @@ class propertyImage(models.Model):
     image4 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
     image5 = models.ImageField(upload_to='media/property_images', null=True, blank=True)
 
-    def __str__(self):
-        return self.property.title
+    
+
     
 class propertyVideo(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     default_video = models.FileField(upload_to='media/property_videos')
     video2 = models.FileField(upload_to='media/property_videos', null=True, blank=True)
 
-    def __str__(self):
-        return self.property.title
+    
+
     
 class propertyDocument(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     default_document = models.FileField(upload_to='media/property_documents')
     document2 = models.FileField(upload_to='media/property_documents', null=True, blank=True)
 
-    def __str__(self):
-        return self.property.title
+    
+
 
 
 class typeOfProperty(models.Model):
@@ -56,8 +56,9 @@ class typeOfProperty(models.Model):
     property_type = models.IntegerField(choices=Choices,default=1)
     
 
-    def __str__(self):
-        return self.property.title
+
+
+    
 
 class propertyLocation(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
@@ -67,8 +68,7 @@ class propertyLocation(models.Model):
     country=models.CharField(max_length=100,default='')
     zipcode=models.CharField(max_length=6,default='')
 
-    def __str__(self):
-        return self.property.title
+
     
 class pricing(models.Model):
     Choices=((1,'PerDay'),(2,'PerWeek'),(3,'Monthly'),(4,'Yearly'))
@@ -76,12 +76,12 @@ class pricing(models.Model):
     price_type = models.IntegerField(choices=Choices,default=1)
     price = models.FloatField( default=0)
 
-    def __str__(self):
-        return self.property.title
+
+
 
 class current_renter(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.user.username} - {self.property.title}'
+    
+

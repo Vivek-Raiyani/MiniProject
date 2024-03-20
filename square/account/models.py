@@ -59,7 +59,7 @@ class User(AbstractUser):
 
           USERNAME_FIELD='email'  # authention using email
           EMAIL_FIELD='email' #specify the field used for email identification
-          REQUIRED_FIELDS = ['username','phone_no','gender','user_type','first_name','last_name']  # additional required fields for user creation
+          REQUIRED_FIELDS = ['username','phone_no','gender','user_type']  # additional required fields for user creation
                     
 
           class Meta:
