@@ -1,17 +1,18 @@
 from django.shortcuts import render   
 from .models import Booking, Transaction, cancalation 
 from django.contrib.auth.decorators import login_required
+from property.models import Property
 
 # Create your views here.
 
 @login_required
-def booking(request, property_id):
+def booking(request):# pass property id as a parameter
           if request.method == 'POST':
                     #creating a booking record
                     booking=Booking()
                     booking.user = request.user
 
-                    booking.property = property.objects.get(id=property_id)
+                    booking.property = Property.objects.get(id=request.POST.get('property'))
                     booking.start_date = request.POST.get('start_date')
                     booking.end_date = request.POST.get('end_date')
                     booking.amount = request.POST.get('amount')

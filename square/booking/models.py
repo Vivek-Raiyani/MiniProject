@@ -10,7 +10,7 @@ class Booking(models.Model):
           was_cancled=models.BooleanField(default=False)
 
           def __str__(self):
-            return f'{self.user.username} - {self.property.title}'
+            return f'{self.user} - {self.property}'
 
 class Transaction(models.Model):
           Choices=((1,'Succes'),(2,'Failure'),(3,'Pending'),(4,'Cancled'))
@@ -18,7 +18,7 @@ class Transaction(models.Model):
           booking= models.OneToOneField('booking.Booking', on_delete=models.CASCADE)
 
           def __str__(self):
-            return f'{self.booking.Property.title} - {self.status}'
+            return f'{self.booking} - {self.status}'
 
 class cancalation(models.Model):
           user = models.ForeignKey('account.User', on_delete=models.CASCADE)
@@ -27,4 +27,4 @@ class cancalation(models.Model):
           charges = models.FloatField(default=0)
           refund_amount = models.FloatField(default=0)
           def __str__(self):
-            return f'{self.user.username} - {self.transaction.booking.Property.title}'
+            return f'{self.user} - {self.transaction}'

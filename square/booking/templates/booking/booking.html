@@ -1,0 +1,18 @@
+{% extends 'home/base.html'%}
+
+
+{% block content %}
+          <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <lable for="start_date">Start Date</lable>
+          <input type="date" id="start_date" name="start_date">
+          <lable for="end_date">End Date</lable>
+          <input type="date" id="end_date" name="end_date">
+
+          <lable for="amount">Amount</lable>
+          <input type="number" id="amount" name="amount">
+          <lable for="property">Property</lable>
+          <input type="text" id="property" name="property">
+          <input type="submit" value="Submit">
+          </form>
+{% endblock %}
