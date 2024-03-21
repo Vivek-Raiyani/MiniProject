@@ -9,12 +9,13 @@ from .models import rating, reviews
 
 @login_required
 # create from to add review for property
-def add_reviews(request, property_id):
+def add_reviews(request):
           if request.method=='POST':
                   # service user is only showed the add review option
                   revw=reviews()
                   user=request.user
-                  place=Property.objects.get(id=property_id)
+                  #place=Property.objects.get(id=property_id)
+                  place=Property.objects.get(id=request.POST.get('property'))
 
                   revw.review=request.POST.get('review')
                   revw.user=user
@@ -26,8 +27,10 @@ def add_reviews(request, property_id):
                   rated.rating=request.POST.get('rating')
                   rated.save()
 
-                  return render(request, 'property/property.hmtl')
-          return render(request ,'reviews/addreview.html')
+                  revw.save()
+
+                  return render(request, "property/property.html", {'property': place})
+          return render(request ,'reviews/add_reviws.html')
 
 @login_required
 # create from to add review for property

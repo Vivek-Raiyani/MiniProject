@@ -9,6 +9,8 @@ till friday
 
 saturaday and sunday ui upadte, custom js for button  link all file and check the complete functionlaity. end of mini project
 
+simple review adding feature add make it more simple. and dont need to render new page
+
 book property,
 like homepage ----- learn how to iterate over <queryset>
  add to wishlist, 
