@@ -15,107 +15,48 @@
 {% block properties %}
                     <!-- propety elemnt sample  add on hover animation od scale 1.1 transition 2 sec etc-->
                     <section class='row' style='height: 50vh'>
-                    <section class="card col-md-4"  >
-                              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-indicators">
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                              {% for property in properties %}
+                              <a href="{% url 'property:view' property_id=12 %}">
+
+                              <section class="container col-md-4" >
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                                                  <div class="carousel-indicators">
+                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                                  </div>
+
+                                                  <div class="carousel-inner">
+                                                            {% for image in images %}
+                                                            <div class="carousel-item active" style="height: 50vh">
+                                                                      <img src="{{image.default_image.url}}" alt="...">
+                                                            </div>
+                                                            <div class="carousel-item" style="height: 50vh">
+                                                                      <img src="{{image.image2.url}}" alt="...">
+                                                            </div>
+                                                            <div class="carousel-item" style="height: 50vh">
+                                                                      <img src="{{image.image3.url}}" alt="...">
+                                                            </div>
+                                                            {% endfor %}
+                                                  </div>
+                                                  
+                                                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                  <span class="visually-hidden">Previous</span>
+                                                  </button>
+                                                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                  <span class="visually-hidden">Next</span>
+                                                  </button>
                                         </div>
 
-                                        <div class="carousel-inner" style="height:35vh">
-                                                  <div class="carousel-item active">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                  <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                            <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                        </div>
-                                        
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                        </button>
-                              </div>
-
-                              <div class="card-body overflow-scroll" style="height: 10vh">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                              </div>
-
+                              </section>
+                              </a>
+                              {% endfor %}
                     </section>
 
-                    <section class="container col-md-4" >
-                              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-indicators">
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                        </div>
 
-                                        <div class="carousel-inner">
-                                                  <div class="carousel-item active">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                  <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                            <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                        </div>
-                                        
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                        </button>
-                              </div>
 
-                    </section>
 
-                    <section class="container col-md-4" >
-                              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-indicators">
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                        </div>
 
-                                        <div class="carousel-inner">
-                                                  <div class="carousel-item active">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                  <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                                            <div class="carousel-item">
-                                                            <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" class="d-block w-100" alt="...">
-                                                  </div>
-                                        </div>
-                                        
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                        </button>
-                              </div>
-
-                    </section>
-
-                    </section>
 {% endblock %}

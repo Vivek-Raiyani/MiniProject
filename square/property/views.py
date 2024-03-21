@@ -62,15 +62,36 @@ def property_view(request, property_id):
     # Retrieve property info using the provided property_id
     property_info = get_property_details(property_id)
 
+    property=property_info['property']
+    image=property.propertyimage_set.all()
+    print(image)
+    for i in image:
+        print(i.default_image.url)
+
+
+    # pass all the object with details use the functions to do it
+
     if property_info:
         # If property info is found, render the detail page
 
          # property detials to be fetched like pricing, location etc
-        return render(request, 'property_detail.html', {'property_info': property_info})
+        return render(request, 'property/property.html', {'property': property, 'image':image})
     else:
         # If property info is not found, render a 404 page
         return render(request, '404.html', status=404)
 
 
 # combine the booking and property page or keep them seperate?
+    
+
+'''
+Your approach seems correct. However, it appears there's a typo in the code. In Django, the reverse relation is typically named using the lowercase name of the related model followed by "_set". Therefore, it should be propertyimage_set instead of propertyImage_set. Here's the corrected code:
+
+python
+Copy code
+property = property_info['property']
+images = property.propertyimage_set.all()
+print(images)
+Make sure to use the correct naming convention for the reverse relation. This should resolve the issue you're encountering. If you still face problems, ensure that the related models and their relations are correctly defined in your Django models.
+'''
     

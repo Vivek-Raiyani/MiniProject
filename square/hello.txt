@@ -1,11 +1,21 @@
 to be implemented
--registration page to be created
--signup views function to be created 
+
+till friday
+, update property,remove property,
+
+
+ 
+ add reviews, remove reviews,
+
+saturaday and sunday ui upadte, custom js for button  link all file and check the complete functionlaity. end of mini project
+
+book property,
+like homepage ----- learn how to iterate over <queryset>
+ add to wishlist, 
+
+ 
 
 single page applation like views for property, profiel etc
-
-
-
 - booking functionality , in propery page no need for other page
 ie combine the booking and property view function into one
 

@@ -83,7 +83,7 @@ def add_property(request):
             images.save()
 
             document=propertyDocument()
-            document.document=request.FILES.get('document')
+            document.default_document=request.FILES.get('document')
             document.property=property
             document.save()
 

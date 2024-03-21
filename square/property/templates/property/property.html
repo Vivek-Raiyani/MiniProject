@@ -2,64 +2,23 @@
 
 {% block properties %}
 <div class="container">
-
-          <div class="row">
-                    {% for property in properties %}
-                    <div class="col-md-4">
-                              <div class="card" style="width: 18rem;">
-                                        <img src="{{property.image.url}}" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                                  <h5 class="card-title">{{property.title}}</h5>
-                                                  <p class="card-text">{{property.description}}</p>
-                                                  <a href="{% url 'property_detail' property.id %}" class="btn btn-primary">View Details</a>
-                                        </div>
-                              </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;height: 50vh">
+                
+                <div class="card-images" style="height: 30vh">
+                    {% for image in property.propertyimage_set.all %}
+                        <img src="{{ image.default_image.url }}" alt="..." style="height: 30vh">
                     {% endfor %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{property.title}}</h5>
+                    <p class="card-text">{{property.description}}</p>
+                    <a href="{% url 'property:view' property.id %}" class="btn btn-primary">View Details</a>
+                </div>
 
-
-          </div>
-
-          <div class='container'>
-                    <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" alt="default image">
-                    <div class='row'>
-                              {% for i in propertImage %}
-                              <div class='col-md-3'>
-                                        <img src="{{i.image.url}}" alt="image">
-                              </div>
-                              {% endfor%}
-                    </div>
-
-                    <div>
-                              <p> propety title</p>
-                              <p> propety description</p>
-                              <p> properties location</p>
-                              <p> properties city</p>
-                              <p> properties state</p>
-                              <p> properties country</p>
-                              <p> properties zipcode</p>
-                              <p> propety price</p>
-                              <p> propety type</p>
-                              <p> propety category</p>
-                              <p> propety owner</p>
-                              <p> user preference</p>
-                              <p>status, no of times rented</p>
-                              <p> servies, aminates</p>
-                              <p> ratings</p>
-                              <p> reviews</p>
-
-                    </div>
-          </div> 
+            </div>
+        </div>
+    </div>
 </div>
-
-{% endblock %}
-
-
-
-{% block bookings %}
-<!--we need to pass the id of property in ordere to retive it-->
-<!--we need to pass the id of user in ordere to retive it-->
-<!-- revies and rating-->
-
-
 {% endblock %}
