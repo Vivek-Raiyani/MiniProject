@@ -8,8 +8,9 @@
 
 {% extends 'home/base.html' %}
 
+
 {% block profile %}
-          <section class="container">
+          <section class="container" style="border: 1px solid #4f033d; padding:20px">
                     <!-- image at centre-->
                     <section class="row">
                               <div class="col-md-4">
@@ -20,9 +21,9 @@
                                         <hr>
                                         <p>{{user.phone_no}}</p>
                                         <hr>
-                                        <p>{{user.gender}}</p>
+                                        <p>{{user.get_gender_display}}</p>
                                         <hr>
-                                        <p>{{user.user_type}}</p>
+                                        <p>{{user.get_user_type_display}}</p>
                                         <hr>
                                         <p>{{user.date_joined}}</p>
                                         <hr>
@@ -30,39 +31,44 @@
                                         
                               </div>
 
-                              <div class="col-md-8">
+                              <div class="col-md-8" >
                                         <div class="row">
                                                   <p>{{user.bio}}</p>
+                                                  <p> bio</p>
+                                                  <hr>
                                         </div>
 
                                         
-                                                  {% if user.user_type == 'Owner' %}
-                                                  <div class="row">
-                                                            <div class="col-md-3">
-                                                                      <a href="">My Reviews</a>
+                                                  {% if user.user_type == 2 %}
+                                                  <div class="row" >
+                                                            <div class="col-md-2">
+                                                                      <a href="" style="color:black;text-decoration:none" >My Reviews</a>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                      <a href="">My Bookings</a>
+                                                            <div class="col-md-2">
+                                                                      <a href="" style="color:black;text-decoration:none">My Properties</a>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                      <a href="">Add Property</a></a>
+                                                            <div class="col-md-2">
+                                                                      <a href="{% url 'account:add_property' %}" style="color:black;text-decoration:none">Add Property</a></a>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                      <a href="">Delete listing</a>
+                                                            <div class="col-md-2">
+                                                                      <a href="" style="color:black;text-decoration:none">Delete listing</a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                      <a href="{% url 'booking:history' %}" style="color:black;text-decoration:none">History</a>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                      <a href="" style="color:black;text-decoration:none">Earnings</a>
                                                             </div>
                                                   </div>
                                                   {% else %}
                                                   <div class="row">
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-4">
                                                                       <a href="">My Renting</a>
                                                             </div>
-                                                            <div class="col-md-3">
-                                                                      <a href="">Add Review</a>
-                                                            </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-4">
                                                                       <a href="">History</a></a>
                                                             </div>
-                                                            <div class="col-md-3">
+                                                            <div class="col-md-4">
                                                                       <a href="">Cancalation</a>
                                                             </div>
                                                   </div>
@@ -71,21 +77,27 @@
                                         
                                         <hr>
 
-                                        <div class="row">
-                                                  {% for property in user_properties %}
-                                                            <div class="col-md-3 card">
-                                                                      <img src="https://cdn.pixabay.com/photo/2023/08/05/14/24/twilight-8171206_1280.jpg" alt="default property image">
-                                                                      <div class="card-body">
-                                                                                <h5 class="card-title">{{property.title}}</h5>
-                                                                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                                                      </div>   
-                                                            </div> 
-                                                  {% endfor %}                                                        
-                                        </div>
+                                        
+
+                                        </section>
 
                               </div>
                     </section>
-
+            <a href="{% url 'account:edit_profile' %}" style='position:fixed; bottom:5vh; right:10vw; '><button type="button" class="btn btn-dark" id='add_payment' style=" background-color:#4f033d ; color:#f4f4f4;margin-bottom:20px" >edit profile</button></a>
           </section>
 
+{% endblock %}
+
+{% block script %}
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var ajax_section = document.getElementById("ajax");
+            if (ajax_section) {
+                ajax_section.innerHTML = "Hello from JavaScript!";
+            }
+            let x=fetch("{% url 'account:profile' %}").then((res)=>res.json()).then((data)=>{
+                console.log(data)
+        });
+
+        </script>
 {% endblock %}

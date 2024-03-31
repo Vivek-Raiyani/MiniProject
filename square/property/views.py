@@ -1,58 +1,61 @@
 from django.shortcuts import render
-from .models import Property, propertyImage, typeOfProperty, propertyLocation, current_renter
+from .models import Property, propertyImage, typeOfProperty, propertyLocation, currentrenter,pricing
 from reviews.models import reviews, rating 
 from booking.models import Booking, Transaction
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+#  .filter method gives back query set
 
+#  .get method gives back obkject
 
-def get_property_details(property_id):
-    """
-    Function to retrieve all data related to a particular property from the database.
-    """
+#  returns property,imah=ge, type object
+def get_property_display(property_id):
     try:
-        # Retrieve the property object
-        property_obj = Property.objects.get(pk=property_id)
+        property_ = Property.objects.get(pk=property_id)
+        print(property_)
+        print()
+        
+        image_=propertyImage.objects.get(property=property_)
+        print(image_)
+        print()
 
-        # Retrieve reviews for the property
-        property_reviews = reviews.objects.filter(property=property_obj)
+        type_=typeOfProperty.objects.get(property=property_)
+        print(type_)
+        print()
 
-        # Retrieve ratings for the property
-        property_ratings = rating.objects.filter(property=property_obj)
+        location_ = propertyLocation.objects.get(property=property_)
 
-        # Retrieve property images
-        property_images = propertyImage.objects.filter(property=property_obj)
+        return {
+            'property': property_,
+            'image': image_,
+            'type': type_,
+        }
+    
+    except Property.DoesNotExist:
+        return None
 
-        # Retrieve type of property
-        property_type = typeOfProperty.objects.filter(property=property_obj).first()
 
-        # Retrieve property location
-        property_location = propertyLocation.objects.filter(property=property_obj).first()
+# returns revies and rating of property
+def get_reviews(property_id):
+    property_=Property.objects.get(pk=property_id)
+    reviews_ = reviews.objects.filter(property=property_)
+    print(reviews_)
+    #print()
 
-        # Retrive current renter
-        if not property_obj.availabality:
-            current_renter=current_renter.objects.filter(property=property_obj).first()
-        else:
-            current_renter = None
-
-        # Prepare a dictionary containing all the retrieved data
-        property_details = {
-            'property': property_obj,
-            'reviews': property_reviews,
-            'ratings': property_ratings,
-            'images': property_images,
-            'type': property_type,
-            'location': property_location,
-            'current_renter': current_renter
+    # Retrieve ratings for the property
+    ratings_ =  rating.objects.filter(property=property_)
+    print(ratings_)
+    #print()
+        
+    return {
+        'reviews': reviews_,
+        'ratings': ratings_,
         }
 
 
-        return property_details
 
-    except Property.DoesNotExist:
-        return None
 
 
 def property_view(request, property_id):
@@ -60,22 +63,16 @@ def property_view(request, property_id):
     View function to render the property detail page.
     """
     # Retrieve property info using the provided property_id
-    property_info = get_property_details(property_id)
+    place=get_property_display(property_id)
+    print(place)
+    reviews=get_reviews(property_id)
+    print(reviews)
 
-    property=property_info['property']
-    image=property.propertyimage_set.all()
-    print(image)
-    for i in image:
-        print(i.default_image.url)
-
-
-    # pass all the object with details use the functions to do it
-
-    if property_info:
+    if property:
         # If property info is found, render the detail page
 
          # property detials to be fetched like pricing, location etc
-        return render(request, 'property/property.html', {'property': property, 'image':image})
+        return render(request, 'property/property.html', {'place': place, 'data': reviews})
     else:
         # If property info is not found, render a 404 page
         return render(request, '404.html', status=404)
@@ -94,4 +91,26 @@ images = property.propertyimage_set.all()
 print(images)
 Make sure to use the correct naming convention for the reverse relation. This should resolve the issue you're encountering. If you still face problems, ensure that the related models and their relations are correctly defined in your Django models.
 '''
+
+from datetime import datetime
+
+def date_difference(date1, date2):
+    # Convert the input strings to datetime objects
+    date1_obj = datetime.strptime(date1, '%Y-%m-%d')
+    date2_obj = datetime.strptime(date2, '%Y-%m-%d')
+
+    # Calculate the difference between the two dates
+    difference = date2_obj - date1_obj
+
+    # Calculate the difference in days
+    difference_days = difference.days
+
+    # Calculate the difference in months
+    difference_months = date2_obj.month - date1_obj.month + 12 * (date2_obj.year - date1_obj.year)
+
+    # Calculate the difference in years
+    difference_years = date2_obj.year - date1_obj.year
+
+    return difference_days, difference_months, difference_years
+
     

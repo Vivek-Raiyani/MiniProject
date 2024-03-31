@@ -5,7 +5,7 @@ class Property(models.Model):
           title = models.CharField(max_length=100,null=True,blank=True)
           description = models.TextField(null=True,blank=True)
           times_rented=models.IntegerField(default=0)
-          availabality=models.BooleanField(default=False)
+          availabality=models.BooleanField(default=True)
 
           # some property owners prefer that they rent only for particular age group, for example they prefer to rent only for students, for girls, etc
           Choices=((1,'Family'),(2,'Bachelor'),(3,'Students'),(4,'Only_for_Girls'),(5,'Only_for_Boys'),(6,'all'))
@@ -79,7 +79,7 @@ class pricing(models.Model):
 
 
 
-class current_renter(models.Model):
+class currentrenter(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     user = models.ForeignKey('account.User', on_delete=models.CASCADE)
 

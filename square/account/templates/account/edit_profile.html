@@ -7,17 +7,17 @@
 {% extends 'home/base.html' %}
 
 {% block profile %}
-          <section class="container">
+          <section class="container" style="border: 1px solid #4f033d; padding:20px">
                     <!-- image at centre-->
                     <form method="post" enctype="multipart/form-data">
                               {% csrf_token %}
                               <section class="row">
                                         <div class="col-md-4">
                                                   <img src="{{user.profile_pic.url}}" alt="" class="img-fluid">
-                                                  <input type="file" name="profile_pic" placeholder="upadate profile">
+                                                  <input type="file" name="profile_pic" placeholder="upadate profile" style="margin-top:20px">
                                                   <hr> 
                                                   <div class="row">
-                                                            <input type="textarea" name="bio" placeholder="{{user.bio}}">
+                                                            <input type="textarea" name="bio"  style="height:5vh;width:25vw; margin-left:10px" placeholder="{{user.bio}}">
                                                   </div>  
                                                   
                                         </div>
@@ -42,7 +42,7 @@
                                                   </select>
                                                   <hr>
 
-                                                  <button class="btn btn-primary" type="submit">Update Profile</button>
+                                                  <button class="btn btn-primary" type="submit" style=" background-color:#4f033d ; color:#f4f4f4">Update Profile</button>
                                         </div>
                               </section>
                     </form>

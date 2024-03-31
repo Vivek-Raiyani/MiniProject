@@ -1,11 +1,13 @@
 to be implemented
 
+dark mode, fetch data from databse when a button is clicked and display it on a perticluer section of page.
+if all is done then add chatbot to site using flowise or ohter 
+
+
+
 till friday
 , update property,remove property,
-
-
- 
- add reviews, remove reviews,
+ remove reviews,
 
 saturaday and sunday ui upadte, custom js for button  link all file and check the complete functionlaity. end of mini project
 

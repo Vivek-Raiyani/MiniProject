@@ -18,9 +18,7 @@ def get_wishlist_properties(user):
         wishlist_properties = Wishlist.objects.filter(user=user).select_related('property')
 
         # Extract property objects from wishlist items
-        properties_in_wishlist = [wishlist.property for wishlist in wishlist_properties]
-
-        return properties_in_wishlist
+        return wishlist_properties
 
     except Wishlist.DoesNotExist:
         return []

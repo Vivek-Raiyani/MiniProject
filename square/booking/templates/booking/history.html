@@ -1,0 +1,14 @@
+{% extends 'home/base.html'%}
+
+{% block content %}
+          {% for booking in record %}
+          <hr>
+          <h2>{{ booking.property.title }}</h2>
+          <p>Start Date: {{ booking.start_date }}</p>
+          <p>End Date: {{ booking.end_date }}</p>
+          <p>Amount: {{ booking.amount }}</p>
+          <p> paid: {{ booking.user }}</p>
+          <p>Owner: {{ booking.property.owner }}</p>
+          <hr>
+          {% endfor %}
+{% endblock %}

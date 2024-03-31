@@ -1,4 +1,6 @@
-from django.shortcuts import render
+
+from django.shortcuts import render, redirect
+from django.urls import reverse
 
 # Create your views here.
 from django.contrib.auth import authenticate, login, logout
@@ -20,7 +22,7 @@ def login_view(request):
             # User is authenticated, log them in
             login(request, user)
             # Redirect to the homepage or any other desired page
-            return render(request, 'home/homepage.html')  # Change 'home' to the name of your homepage URL pattern
+            return redirect(reverse('home:homepage'))  # Change 'home' to the name of your homepage URL pattern
         else:
             # Authentication failed, display an error message
             error_message = "Invalid username or password. Please try again."
@@ -33,7 +35,7 @@ def logout_view(request):
     # Log the user out
     logout(request)
     # Redirect to the homepage or any other desired page
-    return render( request, 'home/homepage.html')
+    return redirect(reverse('home:homepage'))
 
 def signup_view(request):
     # Handle user signup
@@ -57,5 +59,5 @@ def signup_view(request):
 
                 user.username = request.POST.get('username')
                 user.save()
-                return render(request, 'login/login.html')
+                return redirect(reverse('login:login'))
     return render(request, 'login/signup.html')

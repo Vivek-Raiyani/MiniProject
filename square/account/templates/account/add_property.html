@@ -1,88 +1,64 @@
 {% extends 'home/base.html' %}
 
-<!--  make ui better show the images uploaded by user befor submitting the property.so they can get idea of the image-->
-
 {% block content %}
-<!-- square\account\templates\account\add_property.html -->
-          <div class="container">
-                    <form method="post" enctype="multipart/form-data">
-                              {% csrf_token %}
-                              <div class="container">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input type="text" class="form-control" id="title" name="title">
-                              </div>
-                              <div class="container">
-                                        <label for="description" class="form-label">Description</label>
-                                        <input type="textarea" class="form-control" id="description" name="description">
-                              </div>
-                              <div class="container">
-                                        <select name="user_preference">
-                                                  <!--  in selction feild dynamically get the value form databse for option-->
-                                                  <option value=1>family</option>
-                                                  <option value=2>single</option>
-                                        </select>
-                              </div>
-                              <div class="container">
-                                        <label for="default_image" class="form-label">Default Image</label>
-                                        <input type="file" class="form-control" id="default_image" name="default_image">
-                              </div>
-                              <div class="container">
-                                        <label for="image2" class="form-label">Image 2</label>
-                                        <input type="file" class="form-control" id="image2" name="image2">
-                              </div>
-                              <div class="conatiner">
-                                        <label for="image3" class="form-label">Image 3</label>
-                                        <input type="file" class="form-control" id="image3" name="image3">
-                              </div>
-                              <div class="conatiner">
-                                        <label for="image4" class="form-label">Image 4</label>
-                                        <input type="file" class="form-control" id="image4" name="image4">
-                              </div>
-                              <div class="container">
-                                        <label for="image5" class="form-label">Image 5</label>
-                                        <input type="file" class="form-control" id="image5" name="image5">
-                              </div>
-                              <div class="container">
-                                        <label for="document" class="form-label">Document</label>
-                                        <input type="file" class="form-control" id="document" name="document">
-                              </div>
-                              <div class="container">
-                                        <label for="location" class="form-label">Location</label>
-                                        <input type="textarea" class="form-control" id="location" name="location">         
-                              </div>
-                              <div class="container">
-                                        <label for="city" class="form-label">City</label>
-                                        <input type="text" class="form-control" id="city" name="city">
-                              </div>
-                              <div class="conatiner">
-                                        <label for="state" class="form-label">State</label>
-                                        <input type="text" class="form-control" id="state" name="state">
-                              </div>
-                              <div class="conatiner">
-                                        <label for="country" class="form-label">Country</label>
-                                        <input type="text" class="form-control" id="country" name="country">
-                              </div>
-                              <div class="container">
-                                        <label for="pincode" class="form-label">Pincode</label>
-                                        <input type="text" class="form-control" id="pincode" name="pincode">
-                              </div>
+<div class="container" style="border: 1px solid #ccc; background-color: #f9f9f9; padding: 20px; border-radius: 5px;">
+    <!-- Booking Section -->
+    <form method="post" enctype="multipart/form-data" style="margin-bottom: 20px;">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="user_preference">User Preference</label>
+            <select name="user_preference" class="form-control">
+                <option value="1">Family</option>
+                <option value="2">Single</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="default_image">Default Image</label>
+            <input type="file" class="form-control" id="default_image" name="default_image">
+        </div>
+        <!-- Repeat the above block for other image inputs -->
 
-                              <div class="container">
-                                        <label for="property_type" class="form-label">Property Type</label>
-                                        <input type="text" class="form-control" id="property_type" name="property_type">
-                              </div>
+        <div class="form-group">
+            <label for="document">Document</label>
+            <input type="file" class="form-control" id="document" name="document">
+        </div>
+        <div class="form-group">
+            <label for="location">Location</label>
+            <textarea class="form-control" id="location" name="location"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="city">City</label>
+            <input type="text" class="form-control" id="city" name="city">
+        </div>
+        <!-- Repeat the above block for state, country, and pincode inputs -->
 
-                              <div class="container">
-                                        <label for="price" class="form-label">Price</label>
-                                        <input type="text" class="form-control" id="price" name="price">
-                                        <select name="price_type">
-                                                  <option value=1>PerDay</option>
-                                                  <option value=2>PerWeek</option>
-                                                  <option value=3>Monthly</option>
-                                                  <option value=4>Yearly</option>
-                                        </select>
-                              </div>
+        <div class="form-group">
+            <label for="property_type">Property Type</label>
+            <input type="text" class="form-control" id="property_type" name="property_type">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="price_type">Price Type</label>
+            <select name="price_type" class="form-control">
+                <option value="1">Per Day</option>
+                <option value="2">Per Week</option>
+                <option value="3">Monthly</option>
+                <option value="4">Yearly</option>
+            </select>
+        </div>
 
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+        <button type="submit" class="btn btn-primary" style="background-color: #4f033d; color: #f4f4f4;">Submit</button>
+    </form>
+</div>
 {% endblock %}

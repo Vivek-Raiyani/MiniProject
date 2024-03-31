@@ -14,7 +14,7 @@ class Booking(models.Model):
 
 class Transaction(models.Model):
           Choices=((1,'Succes'),(2,'Failure'),(3,'Pending'),(4,'Cancled'))
-          status=models.IntegerField(choices=Choices,default=3)
+          status=models.IntegerField(choices=Choices,default=1)
           booking= models.OneToOneField('booking.Booking', on_delete=models.CASCADE)
 
           def __str__(self):

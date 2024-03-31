@@ -7,19 +7,46 @@
                     <meta name="description" content="">
                     <meta name="viewport" content="width=device-width, initial-scale=1">
                     <link rel="stylesheet" href="">
+                    {% load static %}
+                    {% load bootstrap5 %}<!-- loading the bootstrap installed with django-->
+                    {% bootstrap_css %}
+                    {% bootstrap_javascript %}
           </head>
           <body>
-                    <form method="post">
-                              {% csrf_token %}
-                              <label for="Email">Email</label>
-                              <input type="text" id="Email" name="email">
-                              <hr>
-                              <label for="password">Password:</label>
-                              <input type="password" id="password" name="password">
-                              <hr>
+                    <div class='container' style="padding-top: 20vh">
+                              <div class='row  gx-5 gy-5'>
+                                        <div class='col-md-6'>
+                                                  <div class="container">
+                                                            <img src="https://cdn.pixabay.com/photo/2023/08/19/10/40/house-8200248_640.jpg" width="100%">
+                                                  </div>
+                                        </div>
+                                        <div class='col-md-6'>
+                                                  
+                                                  <form action="{% url 'login:login' %}" method="post" style='border:2px solid #4f033d ; border-radius:10px ;padding :3rem; text-align:center '>
+                                                            {% csrf_token %}
+                                                                      <h1 class='mb-4'>Login</h1>
 
-                              <button type="submit">Login</button>
-                    </form>
+                                                                      <div class="form-floating mb-3">
+                                                                                <input type="email" class="form-control" id="floatingInput" placeholder="Username" name='email'>
+                                                                                <label for="floatingInput">Email</label>
+                                                                      </div>
+
+                                                                      <div class="form-floating mb-3">
+                                                                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name='password'>
+                                                                                <label for="floatingPassword">Password</label>
+                                                                      </div>
+
+                                                                      <div class="mb-3" style='text-align:right;'>
+                                                                      <a href="{% url 'login:login' %}" style='color:#4f033d; text-decoration:none;' class='btn'>forget password?</a>
+                                                                      </div>
+                                                                      
+                                                                      
+                                                                      <input type="submit" class="btn " style='background-color:#4f033d ; color:#f4f4f4;' value='Login'>
+                                                                      <a href="{% url 'login:signup' %}" class="btn " style='background-color:#4f033d ; color:#f4f4f4;'>Signup</a>
+                                                  </form>
+                                        </div>
+
+                                        
                     
                     <script src="" async defer></script>
           </body>

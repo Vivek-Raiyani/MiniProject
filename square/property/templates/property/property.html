@@ -1,24 +1,121 @@
 {% extends 'home/base.html' %}
 
 {% block properties %}
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card" style="width: 18rem;height: 50vh">
-                
-                <div class="card-images" style="height: 30vh">
-                    {% for image in property.propertyimage_set.all %}
-                        <img src="{{ image.default_image.url }}" alt="..." style="height: 30vh">
-                    {% endfor %}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{property.title}}</h5>
-                    <p class="card-text">{{property.description}}</p>
-                    <a href="{% url 'property:view' property.id %}" class="btn btn-primary">View Details</a>
-                </div>
 
-            </div>
+<div class='container' style="height: 80vh">
+    <div class='container'>
+        <img src="{{ place.image.default_image.url }}" class="img-fluid" alt="hero image"  style="height: 60vh ;padding-left: 15vw;padding-right: 15vw">
+        <hr>
+    </div>
+    <div class='container'>
+        <div class='row gy-3 gx-3'style='height: 20vh; padding-left: 5vw;padding-right: 5vw'>
+                <div class='col-2'>
+                <img src="{{ place.image.default_image.url }}" class="img-fluid" alt="default_image" style="height: 12vh">
+                </div>
+                <div class='col-2'>
+                <img src="{{ place.image.image2.url }}" class="img-fluid" alt="default_image" style="height: 12vh">
+                </div>
+                <div class='col-2'>     
+                <img src="{{ place.image.image3.url }}" class="img-fluid" alt="default_image" style="height: 12vh">
+                </div>
+                <div class='col-2'>
+                <img src="{{ place.image.image4.url }}" class="img-fluid" alt="default_image" style="height: 12vh">
+                </div>
+                <div class='col-2'>
+                <img src="{{ place.image.image5.url }}" class="img-fluid" alt="default_image" style="height: 12vh">
+                </div>
+            <hr>
         </div>
     </div>
 </div>
+
+<div class='container' style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <h3 style="color: #333; font-size: 24px; margin-bottom: 10px;">Title: {{ place.property.title }}</h3>
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">Description: {{ place.property.description }}</p>
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">No of Times Rented: {{ place.property.times_rented }}</p>
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">Owner: {{ place.property.owner }}</p>
+    {% if place.property.availabality %}
+    <p style="color: #3cb371; font-size: 16px; margin-bottom: 5px;">Available</p>
+    {% else %}
+    <p style="color: #ff6347; font-size: 16px; margin-bottom: 5px;">Not Available</p>
+    {% endif %}
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">State: {{ place.property.location.state }}</p>
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">Country: {{ place.property.location.country }}</p>
+    <p style="color: #333; font-size: 18px; margin-bottom: 5px;">Price: {{ place.type.pricing_set.first.price }}</p>
+    <p style="color: #666; font-size: 16px; margin-bottom: 5px;">Price Type: {{ place.type.pricing_set.first.get_price_type_display }}</p>
+</div>
+
+<hr>
+
+<div class='container' style="background-color: #f9f9f9; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <!-- Booking Section -->
+    <form action="{% url 'booking:booking' %}" method="POST" id="booking_form" style="margin-bottom: 20px;">
+        {% csrf_token %}
+        <label for="start_date" style="font-weight: bold; margin-bottom: 5px;">Start Date:</label>
+        <input type="date" name="start_date" id="start_date" required style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+        <br>
+        <label for="end_date" style="font-weight: bold; margin-bottom: 5px;">End Date:</label>
+        <input type="date" name="end_date" id="end_date" required style="padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin-bottom: 10px;">
+        <br>
+        <button type="button" id="calculate_button" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Calculate</button>
+        <p id="result" name="amount" style="font-size: 16px; margin-top: 10px;"></p> <!-- Change the id to result -->
+        <input type="hidden" name="amount" id="amount"> <!-- Add a hidden input field for amount -->
+        <br>
+        <input type="hidden" name="property" id="property" value="{{ place.property.id }}"> 
+        <input type="submit" value="Confirm Booking" style="background-color: #008CBA; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+    </form>
+</div>
+
+
+<!-- Reviews Section                     working still need to add upade and remive options 
+<div class='container'>
+    <h3>Reviews</h3>
+    {% for review in data.reviews %}
+        <p> {{ review.user.username }}: {{ review.review }} </p>
+    {% empty %}
+        <p>No reviews available</p>
+    {% endfor %}
+</div>
+-->
+
+
+
+<script>
+    document.getElementById('calculate_button').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        // Get the start date and end date values
+        var startDate = new Date(document.getElementById('start_date').value);
+        var endDate = new Date(document.getElementById('end_date').value);
+
+        // Get the price and price type from Django template variables
+        var price = {{ place.type.pricing_set.first.price }};
+        var priceType = {{ place.type.pricing_set.first.price_type }};
+
+        // Calculate the difference in days between start date and end date
+        var differenceInDays = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+
+        // Calculate the amount based on the price type
+        var amount;
+        if (priceType === 1) {
+            amount = differenceInDays * price;
+        } else if (priceType === 2) {
+            amount = Math.ceil(differenceInDays / 7) * price;
+        } else if (priceType === 3) {
+            amount = Math.ceil(differenceInDays / 30) * price;
+        } else if (priceType === 4) {
+            amount = Math.ceil(differenceInDays / 365) * price;
+        }
+
+        // Set the calculated amount in the result paragraph and hidden input field
+        document.getElementById('result').textContent = "Amount: " + amount.toFixed(2); // Display amount
+        document.getElementById('amount').value = parseInt(amount.toFixed(2)); // Set amount in hidden input
+    });
+</script>
+
+
 {% endblock %}
+
+<!--   update  the data of the property like time srented staus etc.
+        add review feature
+-->

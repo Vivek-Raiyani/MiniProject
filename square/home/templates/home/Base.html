@@ -11,38 +11,38 @@
                     {% bootstrap_css %}
                     {% bootstrap_javascript %}
           </head>
-          <body class="container" >
+          <body class="container" style="width:200vw" >
                     <!--  nav bar  -->
-                    <div style="background-color: black; height: 15vh; padding-top: 5vh">
+                    <div style="background-color: black; height: 5vh; padding-top: 2vh">
                               {% if user.is_authenticated %}
-                              <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                                        <div class="container-fluid">
-                                                  <a class="navbar-brand" href="#">Navbar</a>
+                              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0px">
+                                        <div class="container-fluid" style="background-color:black">
+                                                  {% comment %} <a class="navbar-brand" href="#">Navbar</a> {% endcomment %}
                                                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                                   <span class="navbar-toggler-icon"></span>
                                                   </button>
                                                   <div class="collapse navbar-collapse row" id="navbarSupportedContent">
-                                                            <a class="nav-link active col-2" aria-current="page" href="#">Home</a>
-                                                            <a class="nav-link col-2" href="#">Wishlist</a>
-                                                            <a class="nav-link active col-2" aria-current="page" href="#">My Property</a>
-                                                            <a class="nav-link col-2" href="#">My rental</a>
-                                                            <a class="nav-link col-2" href="#">My Account</a>
-                                                            <a class="nav-link col-2" href="#">Logout</a>
+                                                            <a class="nav-link active col-2" aria-current="page" href="{% url 'home:homepage' %}">Home</a>
+                                                            <a class="nav-link col-2" href="{% url 'wishlist:wishlist' %}">Wishlist</a>
+                                                            <a class="nav-link active col-2" aria-current="page" href="{% url 'account:myproperty' %}">My Property</a>
+                                                            <a class="nav-link col-2" href="{% url 'account:myrental' %}">My rental</a>
+                                                            <a class="nav-link col-2" href="{% url 'account:profile' %}">My Account</a>
+                                                            <a class="nav-link col-2" href="{% url 'login:logout' %}">Logout</a>
                                                   </div>
                                         </div>
                               </nav>
 
                               {% else %}
-                              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                              <nav class="navbar navbar-expand-lg navbar-light bg-light"style="background-color:black" >
                                         <div class="container">
                                                   <a class="navbar-brand" href="#" style='width: 10%'>Navbar</a>
-                                                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                                  <button class="navbar-toggler"  style="background-color:black"type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                                   <span class="navbar-toggler-icon"></span>
                                                   </button>
                                                   <div class="collapse navbar-collapse row " id="navbarSupportedContent">
                                                                       <p class="col-8"></p>
-                                                                      <a class="nav-link active col-2" aria-current="page" href="#">Home</a>
-                                                                      <a class="nav-link col-2" href="#">Login/Register</a>
+                                                                      <a class="nav-link active col-2" aria-current="page" href="{% url 'home:homepage' %}">Home</a>
+                                                                      <a class="nav-link col-2" href="{% url 'login:login' %}">Login/Register</a>
                                                   </div>
                                         </div>
                               </nav>
@@ -57,12 +57,6 @@
                     {% endblock %}
 
                     {% block profile %}
-                    {% endblock %}
-
-                    <hr>
-                    <p>ad sections</p>
-
-                    {% block ad %}
                     {% endblock %}
 
                     {% block content %}
@@ -81,58 +75,9 @@
 
                     <hr>
 
-                    {% block services %}
-                    <div class="container">
-                              <div class="row">
-                                        <div class="col-md-4">
-                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\home logo.png" alt="">
-                                                  <h4>Enjoy Some Flexibility</h4>
-                                                  <h6>make it easy to book your space </h6>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\headphone.png" alt="">
-                                                  <h4>24/7 CUSTOMER SERVICE</h4>
-                                                  <h6>Friendly 24/7 customer support </h6>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\Icon-check.png" alt="">
-                                                  <h4>MONEY BACK GUARANTEE</h4>
-                                                  <h6>We reurn money within 30 days </h6>
-                                        </div>
-                              </div>
-                    </div>
+                    {% block script %}
                     {% endblock %}
 
-                    <footer style="background-color: black; padding-bottom: 5vh; color:white">
-                              <hr>
-                              <div class="row g-2">
-                                        <div class="col-md-4">
-                                        <h3>Support</h3>
-                                        <ul>
-                                                  <li>Contact us</li>
-                                                  <li>Cancellation support</li>
-                                                  <li>Report a problem</li>
-                                        </ul>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                        <h3>Account</h3>
-                                        <ul>
-                                                  <li><a href="#">My Account</a></li>
-                                                  <li><a href="#">Login/Register</a></li>
-                                                  <li><a href="#">Wishlist</a></li>
-                                        </ul>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                        <h3>About nextsquare</h3>
-                                        <p class="about_P">We provide rental solutions for homes, garages, and warehouses, ensuring convenience and satisfaction
-                                                  for both
-                                                  tenants and property owners with our curated selection of properties and streamlined processes.</p>
-                                        </div>
-                              </div>
-                    </footer>
+                    
           </body>
 </html>

@@ -5,7 +5,7 @@
                     <div class="head_img">
                               <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\main-page-home1.jpg" alt="">
                     </div>
-                    <h2 class="img-text">Find Your Perfect Place:
+                    <h2 class="img-text" style="text-align: center">Find Your Perfect Place:
                               <br>
                               Rent with Ease!
                     </h2>
@@ -14,49 +14,85 @@
 
 {% block properties %}
                     <!-- propety elemnt sample  add on hover animation od scale 1.1 transition 2 sec etc-->
-                    <section class='row' style='height: 50vh'>
-                              {% for property in properties %}
-                              <a href="{% url 'property:view' property_id=12 %}">
 
-                              <section class="container col-md-4" >
-                                        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                                                  <div class="carousel-indicators">
-                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                                  </div>
+            <section class='row gx-5'>
+                {% for property in properties %}
+                        
+                        <a class="col" href="{% url 'property:view' property_id=property.id %}" style='text-decoration: none; border: 1px solid black; margin: 10px'>
+                        <h2>{{ property.title }}</h2>
+                        <!-- Access related images -->
+                        {% for image in property.propertyimage_set.all %}
+                                <img src="{{ image.default_image.url }}" alt="Property Image" style='height: 200px'>
+                        {% endfor %}
+                        <!-- Access related location -->
+                        {% for location in property.propertylocation_set.all %}
+                                <p>{{ location.location }}</p>
+                        {% endfor %}
+                        </a>
+                {% endfor %}
 
-                                                  <div class="carousel-inner">
-                                                            {% for image in images %}
-                                                            <div class="carousel-item active" style="height: 50vh">
-                                                                      <img src="{{image.default_image.url}}" alt="...">
-                                                            </div>
-                                                            <div class="carousel-item" style="height: 50vh">
-                                                                      <img src="{{image.image2.url}}" alt="...">
-                                                            </div>
-                                                            <div class="carousel-item" style="height: 50vh">
-                                                                      <img src="{{image.image3.url}}" alt="...">
-                                                            </div>
-                                                            {% endfor %}
-                                                  </div>
-                                                  
-                                                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                  <span class="visually-hidden">Previous</span>
-                                                  </button>
-                                                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                  <span class="visually-hidden">Next</span>
-                                                  </button>
+                
+                        
+
+            </section>
+
+
+
+          <!-- footer-->
+          {% block services %}
+                    <div class="container">
+                    <hr>
+                              <div class="row">
+                                        <div class="col-md-4">
+                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\home logo.png" alt="">
+                                                  <h4>Enjoy Some Flexibility</h4>
+                                                  <h6>make it easy to book your space </h6>
                                         </div>
 
-                              </section>
-                              </a>
-                              {% endfor %}
-                    </section>
+                                        <div class="col-md-4">
+                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\headphone.png" alt="">
+                                                  <h4>24/7 CUSTOMER SERVICE</h4>
+                                                  <h6>Friendly 24/7 customer support </h6>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                                  <img src="E:\nextsquare\MiniProject\square\square\static\paras\home page\home page\Icon-check.png" alt="">
+                                                  <h4>MONEY BACK GUARANTEE</h4>
+                                                  <h6>We reurn money within 30 days </h6>
+                                        </div>
+                              </div>
+                    </div>
+                    {% endblock %}
 
+                    <footer style="background-color: black; padding-bottom: 5vh; color:white">
+                              <hr>
+                              <div class="row g-2">
+                                        <div class="col-md-4">
+                                        <h3>Support</h3>
+                                        <ul>
+                                                  <li>Contact us</li>
+                                                  <li>Cancellation support</li>
+                                                  <li>Report a problem</li>
+                                        </ul>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                        <h3>Account</h3>
+                                        <ul>
+                                                  <li><a href="#">My Account</a></li>
+                                                  <li><a href="#">Login/Register</a></li>
+                                                  <li><a href="#">Wishlist</a></li>
+                                        </ul>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                        <h3>About nextsquare</h3>
+                                        <p class="about_P">We provide rental solutions for homes, garages, and warehouses, ensuring convenience and satisfaction
+                                                  for both
+                                                  tenants and property owners with our curated selection of properties and streamlined processes.</p>
+                                        </div>
+                              </div>
+                    </footer>
 
 
 {% endblock %}

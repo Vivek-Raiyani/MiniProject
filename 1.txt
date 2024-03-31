@@ -1,0 +1,40 @@
+profile page--- user object( single object ), all property of user(query set ), revies to the property( query set ), transacation/ booking record( query set )
+
+homepage---- list of all the property objects ie (query set)
+
+wishlist page--- list of all property wishlisted by user( query set )
+
+login page , signup page like google form multiple section you need to fill one section to go to next section
+
+property page-- takes the id of property within url, property image( single object ),
+                     property detaios and all ( single object ), foem to book the property ( cretae a booking object),
+                              reviews given to propert( query set), rating given (query set)
+                                        book property-- creating a record of the booking/ renting
+
+update profile---- user (single object request.user)
+
+add_property-- cretaes property objects
+
+remove property--  function that takes the input of list of property id to be deleted , before removing make sure that it is not on rent
+
+update property--- takes the currewnt property id and shows deafult , which can be edited( single property object)
+
+history-- take the current user and returns all the record in the booking table( query set )
+
+earning for th owner-- per property , all time this , month, all time
+
+delete user--- check if any transacation is left or not , currently renting or his proprty is being rented
+
+cancalation page--- selecte proprty verification you rent it , reason , create record and update the object of related 
+
+----------------------------------------------------------------------
+
+first learn how to retive a single object 
+
+retive all objects which are connected via a forign ket  _set.all()
+
+email verification , deployment,  cs50 single page app, w3 validator, sms verifacation
+
+payment integaration, other services we provide to our users like mothky cleaning
+
+bug fixing , site attacks etc

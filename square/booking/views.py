@@ -1,7 +1,8 @@
-from django.shortcuts import render   
+from django.shortcuts import redirect, render
+from django.urls import reverse   
 from .models import Booking, Transaction, cancalation 
 from django.contrib.auth.decorators import login_required
-from property.models import Property
+from property.models import Property,currentrenter
 
 # Create your views here.
 
@@ -11,8 +12,8 @@ def booking(request):# pass property id as a parameter
                     #creating a booking record
                     booking=Booking()
                     booking.user = request.user
-
-                    booking.property = Property.objects.get(id=request.POST.get('property'))
+                    place=Property.objects.get(id=request.POST.get('property'))
+                    booking.property = place
                     booking.start_date = request.POST.get('start_date')
                     booking.end_date = request.POST.get('end_date')
                     booking.amount = request.POST.get('amount')
@@ -24,25 +25,37 @@ def booking(request):# pass property id as a parameter
                     record.status = 3
                     record.save()
 
+                    place.availabality= False
+                    place.times_rented+=1
+                    place.save()
+
+                    renter=currentrenter.objects.create(property=place,user=booking.user)
+                    renter.save()
+
+                    
+
                     return render(request, 'account/profile.html')
           return render(request, 'booking/booking.html')
 
 @login_required
-def cancle(request,transaction_id):
-    if request.method== "POST":
-        transaction = Transaction.objects.get(id=transaction_id)
-        cancle=cancalation()
-        if transaction.status == 1:
-               cancle.user = request.user
-               cancle.reason = request.POST.get('reason')
-               cancle.transaction = transaction
-               cancle.charges = transaction.amount * 0.1
-               cancle.refund_amount = transaction.amount - cancle.charges
-               cancle.save()
-               transaction.status = 4
-               transaction.save()
-               transaction.booking.was_cancled = True
-               transaction.booking.save()
-               transaction.booking.property.availabality = True
-               transaction.booking.property.save()
-        return render(request, 'account/profile.html')
+def cancle(request,booking_id):
+        book = Booking.objects.get(id=booking_id)
+        print(book)
+        print("hii")
+        print(book.was_cancled)
+        if book.was_cancled == False:
+               book.was_cancled = True
+               print(book.was_cancled)
+               book.save()
+        if book.was_cancled == True:
+                renter = currentrenter.objects.get(user=book.user, property=book.property)
+                print('heelo')
+                print(renter)
+                renter.delete()
+            
+        return redirect(reverse('account:myrental'))
+    
+def history(request):
+    record=Booking.objects.filter(user=request.user)
+    print(record)
+    return render(request, 'booking/history.html', {'record': record})

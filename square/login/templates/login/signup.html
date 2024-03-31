@@ -2,45 +2,75 @@
 
 {% block content %}
 <div class='container'>
-          <h1>Signup</h1>
-          <form method="post" enctype="multipart/form-data">
-                    <!--  encrypt="multipart/form-data" is required when uploading the file-->
-                    {% csrf_token %}
-                    <label for="Email">Email</label>
-                    <input type="text" id="Email" name="email">
-                    <hr>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password">
-                    <hr>
-                    <label for="confirm_password">Confirm Password:</label>
-                    <input type="password" id="confirm_password" name="confirm_password">
-                    <hr>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name">      
-                    <hr>
-                    <label for="phone">Phone:</label>
-                    <input type="text" id="phone" name="phone">              
-                    <hr>
-                    <label for="profile_pic">Profile Pic:</label>
-                    <input type="file" id="profile_pic" name="profile_pic">      
-                    <hr>
-                    <select name="gender" id="gender">
-                              <option value=1>Male</option>
-                              <option value=2>Female</option>
-                              <option value=3>Other</option>
-                    </select>
-                    <hr>
-                    <select name='user_type' id='user_type'>
-                              <option value=1>Renter</option>
-                              <option value=2>Owner</option>
-                    </select>
-                    <hr>
-                    <label for="username">username</label>
-                    <input type="text" id="username" name="username">
-                    <hr>
+          <div class='row  gx-5 gy-5'>
+                    <div class='col-md-6'>
+                              <div class="container" style="padding-top: 20vh">
+                                        <img src="https://cdn.pixabay.com/photo/2024/03/07/10/38/simba-8618301_640.jpg" width="100%">
+                              </div>
+                    </div>
+                    <div class='col-md-6'>
+          
+          
+                    <form method="post" enctype="multipart/form-data">
+                                                  {% csrf_token %}
+                                                  
+                                                  <div class='container mt-5' style=' border:2px solid #4f033d ; border-radius:10px ;padding :3rem; text-align:center '>
+                                                            <!-- inline style to css file-->
+                                                            <h1 class='mb-4'>signup</h1>
 
-                    <button type="submit">Signup</button>   
-          </form>
-</div>
+                                                            <div class='mb-3 form-floating'>
+                                                                      <input type="text" class="form-control" id="username" name='username' placeholder="username">
+                                                                      <label for="username">Usename</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                      <input type="email" class="form-control" id="floatingInput3" placeholder="name@example.com" name='email'>
+                                                                      <label for="floatingInput3">Email address</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-3">
+                                                                      <input type="password" class="form-control" id="floatingPassword1" placeholder="Password" name='password'>
+                                                                      <label for="floatingPassword1">Password</label>
+                                                            </div>
+
+                                                            <div class="form-floating mb-4">
+                                                                      <input type="password" class="form-control" id="floatingPassword2" placeholder="Password" name='confirm_password'>
+                                                                      <label for="floatingPassword2">Confirm Password</label>
+                                                            </div>
+
+
+                                                            <select name="gender" id="gender" class="form-select mb-4">
+                                                                      <option value=1>Male</option>
+                                                                      <option value=2>Female</option>
+                                                                      <option value=3>Other</option>
+                                                            </select>
+                                                            <hr>
+                                                            <select name='user_type' id='user_type' class="form-select mb-4">
+                                                                      <option value=1>Renter</option>
+                                                                      <option value=2>Owner</option>
+                                                            </select>
+
+                                                            <div class='mb-3 form-floating'>
+                                                                      <input type="text" class="form-control" id="name" name='name' placeholder="name">
+                                                                      <label for="name">name</label>
+                                                            </div>
+                                                            <div class='mb-3 form-floating'>
+                                                                      <input type="tel" class="form-control" id="phone" name='phone' placeholder="phone">
+                                                                      <label for="phone">Phone</label>
+                                                            </div>
+
+
+                                                            <div class="mb-4" style='text-align:left'><!-- inline style to css file-->
+                                                                      <label for="formFile" class="form-label">Select Profile image</label>
+                                                                      <input class="form-control" type="file" id="formFile" name='profile_pic'>
+                                                            </div>
+                                                            
+                                                            <input type='submit' class="btn btn-outline" value='Signup' style='background-color:#4f033d ; color:#f4f4f4'>
+                                                            
+                                                  </div>
+                                        </form>
+
+                    </div>
+          </div>
 
 {% endblock %}

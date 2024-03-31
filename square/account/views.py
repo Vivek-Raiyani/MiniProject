@@ -1,12 +1,10 @@
 from django.shortcuts import render
-
-from django.shortcuts import render
 from reviews.models import reviews
-from  property.models import Property, current_renter, propertyDocument, propertyImage, propertyLocation, typeOfProperty, pricing
+from  property.models import Property, currentrenter, propertyDocument, propertyImage, propertyLocation, typeOfProperty, pricing
 from booking.models import Booking, Transaction
 from django.contrib.auth.decorators import login_required
 
-from property.views import get_property_details
+from property.views import get_property_display
 
 # Create your views here.
 
@@ -25,37 +23,18 @@ def account(request):
     View function to render the user profile page.
     """
     user = request.user  # Assuming user is authenticated
-    user_properties = Property.objects.filter(owner=user)
-    user_renting= current_renter.objects.filter(user=user)
-    user_reviews = reviews.objects.filter(user=user)
-    
-    properties_info = []  # List to hold property info dictionaries
-    for property in user_properties:
-        property_info = get_property_details(property.id)  # Retrieve detailed info for each property
-        if property_info:
-            properties_info.append(property_info)
+   
+    #property=get_property_display()
 
     # getting user history
     user_history = history(user)
 
     context = {
         'user': user,
-        'user_properties': properties_info,
-        'user_reviews': user_reviews,
-        'user_renting': user_renting,
-        'user_history': user_history
     }
+   
 
     # for debugging purpose to print details on the terminal
-    print(user)
-    print(user_properties)
-    print(user_reviews)
-    print(user_renting)
-    print(properties_info)
-    print(context)
-    print(user.profile_pic.url)
-    print('user history')
-    print(user_history)
     
     
     
@@ -162,3 +141,67 @@ def edit_profile(request):
         user.save()
         return render(request, 'account/profile.html')
     return render(request, 'account/edit_profile.html')
+
+
+# Create your views here.
+
+
+# similar to home page but need to extract from the wish list table all same
+
+def get_properties(user):
+    """
+    Function to retrieve all properties in the wishlist of the current user.
+    """
+    try:
+        # Retrieve wishlist items for the current user
+        properties = Property.objects.filter(owner=user)
+
+        # Extract property objects from wishlist items
+        return properties
+
+    except properties.DoesNotExist:
+        return []
+    
+
+@login_required
+def myproperty(request):
+    """
+    View function to render the wishlist page for the current user.
+    """
+    if request.user.is_authenticated:
+        user = request.user
+        properties = get_properties(user)
+
+        
+        # printing all the wishlist propert on the terminal for debuggin puropse
+        print(user)
+            
+
+
+
+        return render(request, 'account/myproperty.html', {'properties': properties })
+    else:
+        # Handle case where user is not authenticated
+        return render(request, 'account/myproperty.html', {'properties': []})
+    
+def get_rent(user):
+    property_id=currentrenter.objects.filter(user=user)
+    property=[]
+    booking=[]
+    for id in property_id:
+        property.append(Property.objects.get(id=id.property_id))
+        booking.append(Booking.objects.get(property=id.property_id))
+    return {
+        'property': property,
+        'booking': booking
+    }
+
+def myrental(request):
+    if request.user.is_authenticated:
+        user = request.user
+        properties = get_rent(user)
+        print(properties)
+        return render(request, 'account/myrental.html', {'properties': properties })
+    else:
+        # Handle case where user is not authenticated
+        return render(request, 'account/myrental.html', {'properties': []})
