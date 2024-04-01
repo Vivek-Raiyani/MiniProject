@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from property.models import Property, pricing, propertyDocument, propertyImage, propertyLocation, typeOfProperty
+from property.models import Property
 
 
 

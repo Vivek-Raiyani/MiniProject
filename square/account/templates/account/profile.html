@@ -41,23 +41,17 @@
                                         
                                                   {% if user.user_type == 2 %}
                                                   <div class="row" >
-                                                            <div class="col-md-2">
-                                                                      <a href="" style="color:black;text-decoration:none" >My Reviews</a>
+                                                            <div class="col-md-3">
+                                                                      <a href="{% url 'account:myproperty'%}" style="color:black;text-decoration:none">My Properties</a>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                      <a href="" style="color:black;text-decoration:none">My Properties</a>
-                                                            </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-3">
                                                                       <a href="{% url 'account:add_property' %}" style="color:black;text-decoration:none">Add Property</a></a>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-3">
                                                                       <a href="" style="color:black;text-decoration:none">Delete listing</a>
                                                             </div>
-                                                            <div class="col-md-2">
+                                                            <div class="col-md-3">
                                                                       <a href="{% url 'booking:history' %}" style="color:black;text-decoration:none">History</a>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                      <a href="" style="color:black;text-decoration:none">Earnings</a>
                                                             </div>
                                                   </div>
                                                   {% else %}
@@ -66,10 +60,7 @@
                                                                       <a href="">My Renting</a>
                                                             </div>
                                                             <div class="col-md-4">
-                                                                      <a href="">History</a></a>
-                                                            </div>
-                                                            <div class="col-md-4">
-                                                                      <a href="">Cancalation</a>
+                                                                      <a href="{% url 'booking:history' %}">History</a></a>
                                                             </div>
                                                   </div>
                                                   {% endif %}

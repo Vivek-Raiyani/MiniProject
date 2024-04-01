@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from .models import Property, propertyImage, typeOfProperty, propertyLocation, currentrenter,pricing
 from reviews.models import reviews, rating 
 from booking.models import Booking, Transaction
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 
@@ -78,39 +80,17 @@ def property_view(request, property_id):
         return render(request, '404.html', status=404)
 
 
-# combine the booking and property page or keep them seperate?
-    
 
-'''
-Your approach seems correct. However, it appears there's a typo in the code. In Django, the reverse relation is typically named using the lowercase name of the related model followed by "_set". Therefore, it should be propertyimage_set instead of propertyImage_set. Here's the corrected code:
-
-python
-Copy code
-property = property_info['property']
-images = property.propertyimage_set.all()
-print(images)
-Make sure to use the correct naming convention for the reverse relation. This should resolve the issue you're encountering. If you still face problems, ensure that the related models and their relations are correctly defined in your Django models.
-'''
-
-from datetime import datetime
-
-def date_difference(date1, date2):
-    # Convert the input strings to datetime objects
-    date1_obj = datetime.strptime(date1, '%Y-%m-%d')
-    date2_obj = datetime.strptime(date2, '%Y-%m-%d')
-
-    # Calculate the difference between the two dates
-    difference = date2_obj - date1_obj
-
-    # Calculate the difference in days
-    difference_days = difference.days
-
-    # Calculate the difference in months
-    difference_months = date2_obj.month - date1_obj.month + 12 * (date2_obj.year - date1_obj.year)
-
-    # Calculate the difference in years
-    difference_years = date2_obj.year - date1_obj.year
-
-    return difference_days, difference_months, difference_years
-
-    
+def remove_property(request, property_id):  # Add property_id parameter
+    if request.method == 'POST':
+        print(property_id)
+        property = Property.objects.get(id=property_id)
+        print(property)
+        if property.availabality == False:
+            messages.error(request, 'Cannot delete property with active booking')
+            print('Cannot delete property with active booking')
+            return redirect(reverse('property:view',kwargs={'property_id': property_id}))  # Redirect to the user's profile page
+        property.delete()
+        print('deleted')
+        return redirect(reverse('account:myproperty'))  # Redirect to the user's profile page
+    return redirect(reverse('property:view',kwargs={'property_id': property_id}))  # Return a response for other HTTP methods

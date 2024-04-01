@@ -33,13 +33,6 @@ class propertyVideo(models.Model):
     default_video = models.FileField(upload_to='media/property_videos')
     video2 = models.FileField(upload_to='media/property_videos', null=True, blank=True)
 
-    
-
-    
-class propertyDocument(models.Model):
-    property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    default_document = models.FileField(upload_to='media/property_documents')
-    document2 = models.FileField(upload_to='media/property_documents', null=True, blank=True)
 
     
 

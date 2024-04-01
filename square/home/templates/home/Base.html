@@ -15,7 +15,8 @@
                     <!--  nav bar  -->
                     <div style="background-color: black; height: 5vh; padding-top: 2vh">
                               {% if user.is_authenticated %}
-                              <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0px">
+                                        {% if user.user_type == 2 %}
+                                        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0px">
                                         <div class="container-fluid" style="background-color:black">
                                                   {% comment %} <a class="navbar-brand" href="#">Navbar</a> {% endcomment %}
                                                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +31,25 @@
                                                             <a class="nav-link col-2" href="{% url 'login:logout' %}">Logout</a>
                                                   </div>
                                         </div>
-                              </nav>
+                                        </nav>
+                                        {% else %}
+                                        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0px">
+                                        <div class="container-fluid" style="background-color:black">
+                                                  {% comment %} <a class="navbar-brand" href="#">Navbar</a> {% endcomment %}
+                                                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                                  <span class="navbar-toggler-icon"></span>
+                                                  </button>
+                                                  <div class="collapse navbar-collapse row" id="navbarSupportedContent">
+                                                            <div class ="col-2"></div>
+                                                            <a class="nav-link active col-2" aria-current="page" href="{% url 'home:homepage' %}">Home</a>
+                                                            <a class="nav-link col-2" href="{% url 'wishlist:wishlist' %}">Wishlist</a>
+                                                            <a class="nav-link col-2" href="{% url 'account:myrental' %}">My rental</a>
+                                                            <a class="nav-link col-2" href="{% url 'account:profile' %}">My Account</a>
+                                                            <a class="nav-link col-2" href="{% url 'login:logout' %}">Logout</a>
+                                                  </div>
+                                        </div>
+                                        </nav>
+                                        {% endif %}
 
                               {% else %}
                               <nav class="navbar navbar-expand-lg navbar-light bg-light"style="background-color:black" >

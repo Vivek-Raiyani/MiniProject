@@ -14,27 +14,28 @@
 
 {% block properties %}
                     <!-- propety elemnt sample  add on hover animation od scale 1.1 transition 2 sec etc-->
-
-            <section class='row gx-5'>
-                {% for property in properties %}
-                        
-                        <a class="col" href="{% url 'property:view' property_id=property.id %}" style='text-decoration: none; border: 1px solid black; margin: 10px'>
-                        <h2>{{ property.title }}</h2>
-                        <!-- Access related images -->
-                        {% for image in property.propertyimage_set.all %}
-                                <img src="{{ image.default_image.url }}" alt="Property Image" style='height: 200px'>
-                        {% endfor %}
-                        <!-- Access related location -->
-                        {% for location in property.propertylocation_set.all %}
+            <hr>
+                <section class='row gx-5'>
+            {% for place in properties %}
+        <a class="col-md-4" href="{% url 'property:view' property_id=place.id %}" style='text-decoration:none; color:black;margin-bottom: 20px;'>
+                <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); height: 50vh;">
+                    {% for image in place.propertyimage_set.all %}
+                    <img src="{{ image.default_image.url }}" alt="Property Image" style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                    {% endfor %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ place.title }}</h5>
+                        <p class="card-text">{{ place.description }}</p>
+                        <p class="card-text">Available: {% if place.availabality %} Yes {% else %} No {% endif %}</p>
+                        {% for location in place.propertylocation_set.all %}
                                 <p>{{ location.location }}</p>
                         {% endfor %}
-                        </a>
-                {% endfor %}
-
-                
                         
-
-            </section>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+    </section>
 
 
 

@@ -3,8 +3,17 @@
 {% load static %}
 
 {% block wishlist %}
+
+
+
 <div class="container">
     <h2>Your Wishlist</h2>
+    <hr>
+    {% if messages %}
+        {% for message in messages %}
+           <p style="text-align: center">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
     <div class="row">
         {% for wish in wishlist_properties %}
         <div class="col-md-4">

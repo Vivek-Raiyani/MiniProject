@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from reviews.models import reviews
-from  property.models import Property, currentrenter, propertyDocument, propertyImage, propertyLocation, typeOfProperty, pricing
+from  property.models import Property, currentrenter, propertyImage, propertyLocation, typeOfProperty, pricing
 from booking.models import Booking, Transaction
 from django.contrib.auth.decorators import login_required
 
-from property.views import get_property_display
 
 # Create your views here.
 
@@ -50,7 +49,6 @@ def add_property(request):
             property.description=request.POST.get('description')
             property.user_preference=request.POST.get('user_preference')
             property.owner=request.user
-            property.save()
 
             images=propertyImage()
             images.default_image=request.FILES.get('default_image')
@@ -59,12 +57,7 @@ def add_property(request):
             images.image4=request.FILES.get('image4')
             images.image5=request.FILES.get('image5')
             images.property=property
-            images.save()
 
-            document=propertyDocument()
-            document.default_document=request.FILES.get('document')
-            document.property=property
-            document.save()
 
             location=propertyLocation()
             location.location=request.POST.get('location')
@@ -73,17 +66,21 @@ def add_property(request):
             location.country=request.POST.get('country')
             location.zipcode=request.POST.get('pincode')
             location.property=property
-            location.save()
             
             type=typeOfProperty()
             type.property_type=request.POST.get('property_type')
             type.property=property
-            type.save()
 
             price=pricing()
             price.price=request.POST.get('price')
             price.price_type=request.POST.get('price_type')
             price.property=type
+
+
+            property.save()
+            images.save()
+            location.save()
+            type.save()
             price.save()
             return render(request, 'account/profile.html')
 
@@ -91,33 +88,6 @@ def add_property(request):
 
     return render(request, 'account/profile.html')
 
-
-# implement by use of button not changing url
-#version1
-@login_required
-def remove_property(request):
-    if request.user.user_type == 2:
-        if request.method == 'POST':
-            property_id = request.POST.get('property_id')
-            property = Property.objects.get(id=property_id)
-            property.delete()
-            return render(request, 'account/profile.html')
-
-        return render(request, 'account/remove_property.html')
-    
-    return render(request, 'account/profile.html')
-
-#version 2-----using button not chaning url need to be implemented currently is not working
-def remove_property(request, property_id):
-    if request.user.user_type == 2:
-        if request.method == 'POST':
-            property = Property.objects.get(id=property_id)
-            property.delete()
-            return render(request, 'account/profile.html')
-
-        return render(request, 'account/remove_property.html')
-    
-    return render(request, 'account/profile.html')
 
 @login_required
 def edit_profile(request):
@@ -184,23 +154,46 @@ def myproperty(request):
         # Handle case where user is not authenticated
         return render(request, 'account/myproperty.html', {'properties': []})
     
+
 def get_rent(user):
-    property_id=currentrenter.objects.filter(user=user)
-    property=[]
-    booking=[]
-    for id in property_id:
-        property.append(Property.objects.get(id=id.property_id))
-        booking.append(Booking.objects.get(property=id.property_id))
+    print(user)
+    property_id = currentrenter.objects.filter(user=user)
+    print(property_id)
+    property = []
+    booking = []
+    print(property_id)
+
+    if property_id:  # Check if property_id list is not empty
+        print('hello')
+        for id in property_id:
+            property.append(Property.objects.get(id=id.property_id))
+            book=Booking.objects.filter(property=id.property_id)
+            print(book)
+            for b in book:
+                if b.was_cancled == False:
+                    booking.append(b)
+                    print(b)
+                else:
+                    print('was cancled')
+    else:
+        return None
+    print(booking)
     return {
         'property': property,
         'booking': booking
     }
 
+@login_required
 def myrental(request):
     if request.user.is_authenticated:
         user = request.user
+        print(user)
         properties = get_rent(user)
+        print('prop')
         print(properties)
+        if properties is None:
+            print("message")
+            return render(request, 'account/myrental.html', {'message': 'No rentals found.'})
         return render(request, 'account/myrental.html', {'properties': properties })
     else:
         # Handle case where user is not authenticated

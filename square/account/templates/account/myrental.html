@@ -4,10 +4,17 @@
 
 {% block wishlist %}
 <div class="container">
-    <h2>Your Property</h2>
+    <h2>Your Rentals</h2>
+    <hr>
+
+    
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        
     <div class="row">
         {% for place in properties.property %}
-        <div class="col-md-4">
+            <div class="col-md-4">
             <div class="card">
                     {% for image in place.propertyimage_set.all %}
                               <img src="{{ image.default_image.url }}" alt="Property Image" style='height: 200px'>
@@ -22,15 +29,20 @@
                     {% endif %}
                     {% endfor %}
                 </div>
+            </div>
+            </div>
 
                 <!--
                     create a cancle booking btton 
                 -->
-
-
-            </div>
-        </div>
         {% endfor %}
+
+        
+
+
+        {% if message %} 
+        <p style="text-align: center">{{ message }}</p> 
+        {% endif %}
     </div>
 </div>
 {% endblock %}

@@ -9,6 +9,8 @@
           <p>Amount: {{ booking.amount }}</p>
           <p> paid: {{ booking.user }}</p>
           <p>Owner: {{ booking.property.owner }}</p>
+          <p>Property: {{ booking.property }}</p>
+          <p>Canncled: {{ booking.was_cancled }}</p>
           <hr>
           {% endfor %}
 {% endblock %}

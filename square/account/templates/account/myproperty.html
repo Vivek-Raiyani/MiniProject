@@ -7,20 +7,20 @@
     <h2>Your Properties</h2>
     <div class="row">
         {% for place in properties %}
-        <div class="col-md-4" style="margin-bottom: 20px;">
-            <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-                {% for image in place.propertyimage_set.all %}
-                <img src="{{ image.default_image.url }}" alt="Property Image" style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px;">
-                {% endfor %}
-                <div class="card-body">
-                    <h5 class="card-title">{{ place.title }}</h5>
-                    <p class="card-text">{{ place.description }}</p>
-                    <p class="card-text">Owner: {{ place.owner }}</p>
-                    <p class="card-text">Available: {% if place.availabality %} Yes {% else %} No {% endif %}</p>
-                    <p class="card-text">Renter: {{ place.currentrenter_set.first.user }}</p>
+        <a class="col-md-4" href="{% url 'property:view' property_id=place.id %}" style='text-decoration:none; color:black;margin-bottom: 20px;'>
+                <div class="card" style="border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                    {% for image in place.propertyimage_set.all %}
+                    <img src="{{ image.default_image.url }}" alt="Property Image" style="height: 200px; object-fit: cover; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+                    {% endfor %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ place.title }}</h5>
+                        <p class="card-text">{{ place.description }}</p>
+                        <p class="card-text">Owner: {{ place.owner }}</p>
+                        <p class="card-text">Available: {% if place.availabality %} Yes {% else %} No {% endif %}</p>
+                        <p class="card-text">Renter: {{ place.currentrenter_set.first.user }}</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </a>
         {% endfor %}
     </div>
     <a href="{% url 'account:add_property' %}" style="position: fixed; bottom: 20px; right: 20px;">
